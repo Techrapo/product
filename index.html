@@ -790,17 +790,71 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+  // ===== Google Sheets integration =====
+  // 1. Paste your deployed Apps Script Web App URL below (see setup instructions provided separately).
+  const SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbw_Iw3yP2p-2bFlimv3KJSCJSOiSEleJ-WT8HgivzqKHOY4-DbjUyAOgH_yRFsl2r1OAQ/exec';
+
+  function sendToSheet(payload){
+    return fetch(SHEET_WEBAPP_URL, {
+      method: 'POST',
+      mode: 'no-cors', // Apps Script web apps don't return readable CORS headers; fire-and-forget
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight
+      body: JSON.stringify(payload)
+    });
+  }
+
   // newsletter form
-  document.getElementById('newsletterForm').addEventListener('submit', function(e){
+  const newsletterForm = document.getElementById('newsletterForm');
+  const newsletterMsg = document.getElementById('newsletterMsg');
+  newsletterForm.addEventListener('submit', function(e){
     e.preventDefault();
-    document.getElementById('newsletterMsg').style.display = 'block';
-    this.reset();
+    const email = this.querySelector('input[type="email"]').value.trim();
+    const btn = this.querySelector('button');
+    const originalLabel = btn.innerHTML;
+    btn.disabled = true;
+
+    sendToSheet({ formType: 'newsletter', email: email })
+      .then(() => {
+        newsletterMsg.textContent = "— Thank you, you're subscribed.";
+        newsletterMsg.style.color = '';
+        newsletterMsg.style.display = 'block';
+        newsletterForm.reset();
+      })
+      .catch(() => {
+        newsletterMsg.textContent = '— Something went wrong. Please try again.';
+        newsletterMsg.style.display = 'block';
+      })
+      .finally(() => { btn.disabled = false; btn.innerHTML = originalLabel; });
   });
+
   // contact form
-  document.getElementById('contactForm').addEventListener('submit', function(e){
+  const contactForm = document.getElementById('contactForm');
+  const formMsg = document.getElementById('formMsg');
+  contactForm.addEventListener('submit', function(e){
     e.preventDefault();
-    document.getElementById('formMsg').style.display = 'block';
-    this.reset();
+    const payload = {
+      formType: 'contact',
+      name: document.getElementById('fname').value.trim(),
+      email: document.getElementById('femail').value.trim(),
+      subject: document.getElementById('fsubject').value.trim(),
+      message: document.getElementById('fmessage').value.trim()
+    };
+    const btn = this.querySelector('button[type="submit"]');
+    const originalLabel = btn.innerHTML;
+    btn.disabled = true;
+
+    sendToSheet(payload)
+      .then(() => {
+        formMsg.textContent = "— Thank you, we'll be in touch shortly.";
+        formMsg.style.color = '';
+        formMsg.style.display = 'block';
+        contactForm.reset();
+      })
+      .catch(() => {
+        formMsg.textContent = '— Something went wrong. Please try again.';
+        formMsg.style.display = 'block';
+      })
+      .finally(() => { btn.disabled = false; btn.innerHTML = originalLabel; });
   });
 </script>
 </body>

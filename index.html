@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Techrapo Solutions Private Limited — Consulting, Outsourcing &amp; Technical Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1A579E;
+    --red:#ED1B23;
+    --white:#FFFFFF;
+    --black:#000000;
+    --line: rgba(26,87,158,0.16);
+    --line-soft: rgba(26,87,158,0.09);
+    --wash: rgba(26,87,158,0.035);
+    --wash-2: rgba(26,87,158,0.06);
+    --muted: rgba(26,87,158,0.62);
+    --serif: 'Source Serif 4', serif;
+    --sans: 'Libre Franklin', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--sans);
+    color:var(--black);
+    background:var(--white);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  svg{display:block;}
+  section{position:relative;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 40px;}
+  ::selection{background:var(--blue);color:var(--white);}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+
+  /* scroll progress */
+  .progress{position:fixed;top:0;left:0;height:2px;background:var(--red);width:0%;z-index:2000;transition:width .1s linear;}
+
+  /* eyebrow / clause label */
+  .clause{
+    display:flex;align-items:center;gap:12px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:var(--muted);
+    margin-bottom:20px;text-transform:uppercase;
+  }
+  .clause .mark{color:var(--red);font-weight:500;}
+  .clause::after{content:"";flex:0 0 40px;height:1px;background:var(--line);}
+
+  h1,h2,h3,h4{font-family:var(--serif);color:var(--black);font-weight:500;letter-spacing:-.01em;}
+  h2{font-size:clamp(30px,3.6vw,44px);line-height:1.14;font-weight:500;}
+  p{color:var(--black);opacity:.72;font-size:15.5px;}
+  .lede{font-size:18px;line-height:1.6;opacity:.8;}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--sans);font-weight:600;font-size:13.5px;letter-spacing:.01em;
+    padding:15px 26px;cursor:pointer;border-radius:1px;
+    transition:all .22s cubic-bezier(.16,1,.3,1);
+  }
+  .btn-fill{background:var(--red);color:var(--white);border:1px solid var(--red);}
+  .btn-fill:hover{background:#c8151c;border-color:#c8151c;}
+  .btn-line{background:transparent;color:var(--black);border:1px solid var(--black);}
+  .btn-line:hover{background:var(--black);color:var(--white);}
+  .btn-line-white{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.55);}
+  .btn-line-white:hover{border-color:var(--white);background:rgba(255,255,255,0.08);}
+  .btn svg{width:14px;height:14px;transition:transform .22s ease;}
+  .btn:hover svg{transform:translateX(3px);}
+
+  /* ===== SEAL / MONOGRAM ===== */
+  .seal{position:relative;width:38px;height:38px;flex-shrink:0;object-fit:contain;}
+
+  /* ===== HEADER ===== */
+  header.site{
+    position:sticky;top:0;z-index:1000;background:rgba(255,255,255,0.94);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{max-width:1240px;margin:0 auto;padding:0 40px;height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .brand{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+  .brand-text{font-family:var(--serif);font-size:18.5px;font-weight:500;color:var(--black);line-height:1.1;}
+  .brand-text small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:3px;}
+
+  nav.primary{flex:1;display:flex;justify-content:center;min-width:0;}
+  nav.primary > ul{display:flex;align-items:center;gap:0;flex-wrap:nowrap;}
+  nav.primary > ul > li{position:relative;flex-shrink:0;}
+  nav.primary > ul > li > a, nav.primary > ul > li > button{
+    display:flex;align-items:center;gap:5px;white-space:nowrap;
+    font-family:var(--sans);font-weight:500;font-size:13px;color:var(--black);
+    padding:14px 12px;background:none;border:none;cursor:pointer;position:relative;
+  }
+  nav.primary > ul > li > a::after{
+    content:"";position:absolute;left:12px;right:12px;bottom:11px;height:1px;background:var(--red);
+    transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.16,1,.3,1);
+  }
+  nav.primary > ul > li > a:hover::after{transform:scaleX(1);}
+  nav.primary > ul > li > a:hover, nav.primary > ul > li > button:hover{color:var(--red);}
+  .caret{width:8px;height:8px;transition:transform .2s ease;opacity:.65;flex-shrink:0;}
+  li.has-drop:hover .caret{transform:rotate(180deg);}
+  .dropdown{
+    position:absolute;top:100%;left:0;min-width:270px;background:var(--white);
+    border:1px solid var(--line);box-shadow:0 24px 48px rgba(26,87,158,0.14);
+    padding:6px 0;opacity:0;visibility:hidden;transform:translateY(8px);
+    transition:opacity .2s ease, transform .2s ease, visibility .2s ease;
+    z-index:1100;
+  }
+  li.has-drop:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+  .dropdown a{
+    display:flex;align-items:baseline;gap:10px;padding:12px 20px;
+    font-family:var(--sans);font-size:13.5px;color:var(--black);
+  }
+  .dropdown a .idx{font-family:var(--mono);font-size:11px;color:var(--red);}
+  .dropdown a:hover{background:var(--wash);}
+
+  .nav-cta{display:flex;align-items:center;gap:18px;flex-shrink:0;}
+  .btn-nav{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.01em;
+    padding:11px 20px 11px 14px;border:1px solid var(--black);color:var(--black);
+    background:transparent;position:relative;overflow:hidden;
+  }
+  .btn-nav .status{width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;}
+  .btn-nav span.label{position:relative;z-index:1;}
+  .btn-nav::before{
+    content:"";position:absolute;inset:0;background:var(--black);
+    transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,1,.3,1);z-index:0;
+  }
+  .btn-nav:hover::before{transform:scaleX(1);}
+  .btn-nav:hover{color:var(--white);}
+  .btn-nav:hover .status{background:var(--red);}
+
+  /* burger */
+  .burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:0;flex-shrink:0;}
+  .burger span{width:22px;height:1.5px;background:var(--black);display:block;transition:transform .28s cubic-bezier(.16,1,.3,1), opacity .2s ease;}
+  .burger.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .burger.active span:nth-child(2){opacity:0;}
+  .burger.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+  /* ===== HERO ===== */
+  .hero{padding:72px 0 0;}
+  .hero-top{padding-bottom:56px;border-bottom:1px solid var(--line);max-width:720px;}
+  .hero h1{font-size:clamp(36px,5.4vw,64px);line-height:1.08;font-weight:600;margin:22px 0 26px;}
+  .hero h1 em{font-style:italic;color:var(--red);font-weight:500;}
+  .hero .lede{max-width:480px;margin-bottom:30px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+
+  .hero-strip{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line);text-align:center;}
+  .hero-strip div{padding:26px 0;border-right:1px solid var(--line);padding-left:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .hero-strip div:last-child{border-right:none;}
+  .hero-strip strong{display:block;font-family:var(--serif);font-size:28px;font-weight:500;color:var(--blue);}
+  .hero-strip span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+
+  /* ===== ABOUT ===== */
+  .about{padding:130px 0;}
+  .about .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;}
+  .about-quote{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.4vw,30px);line-height:1.42;color:var(--blue);font-weight:500;}
+  .about-quote .num{display:block;font-family:var(--mono);font-style:normal;font-size:13px;color:var(--red);margin-bottom:18px;letter-spacing:.05em;}
+  .about-body p{margin-bottom:18px;max-width:560px;font-size:16px;}
+  .about-table{margin-top:36px;border-top:1px solid var(--line);}
+  .about-table div{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);}
+  .about-table div span:first-child{font-family:var(--mono);font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  .about-table div span:last-child{font-family:var(--serif);font-size:16px;font-weight:500;}
+
+  /* ===== SERVICES — board grid ===== */
+  .services{padding:130px 0;background:var(--wash);}
+  .service-board{
+    margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line);border-left:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--white);border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:40px 34px;position:relative;overflow:hidden;
+    transition:background .28s ease, transform .28s cubic-bezier(.16,1,.3,1);
+  }
+  .service-card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);
+    transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,1,.3,1);
+  }
+  .service-card:hover::before{transform:scaleX(1);}
+  .service-card:hover{background:var(--wash-2);transform:translateY(-4px);}
+  .service-card .idx{font-family:var(--mono);font-size:12px;color:var(--red);display:block;margin-bottom:26px;}
+  .service-card h3{font-size:20px;font-weight:600;margin-bottom:12px;}
+  .service-card p{font-size:14.5px;}
+
+  /* ===== SOLUTIONS — board grid ===== */
+  .solutions{padding:130px 0;}
+  .solutions .wrap > .clause, .solutions .wrap > h2{max-width:640px;}
+  .solution-board{
+    margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .solution-card{
+    background:var(--white);padding:38px 32px;
+    transition:background .28s ease, transform .28s cubic-bezier(.16,1,.3,1);
+  }
+  .solution-card:hover{background:var(--wash-2);transform:translateY(-4px);}
+  .solution-card .dot{width:9px;height:9px;border-radius:50%;background:var(--red);margin-bottom:22px;}
+  .solution-card h4{font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:12px;}
+  .solution-card p{font-size:14.5px;}
+  .solution-card.wide{grid-column:span 1;}
+
+  /* ===== TECHNOLOGY ===== */
+  .technology{padding:130px 0;background:var(--blue);color:var(--white);}
+  .technology .clause{color:rgba(255,255,255,0.65);}
+  .technology .clause::after{background:rgba(255,255,255,0.25);}
+  .technology .clause .mark{color:var(--red);}
+  .technology h2{color:var(--white);max-width:600px;}
+  .tech-grid{margin-top:56px;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,0.18);border-left:1px solid rgba(255,255,255,0.18);}
+  .tech-card{border-right:1px solid rgba(255,255,255,0.18);border-bottom:1px solid rgba(255,255,255,0.18);padding:30px 22px;transition:background .25s ease;}
+  .tech-card:hover{background:rgba(255,255,255,0.05);}
+  .tech-card span{font-family:var(--mono);font-size:11px;color:var(--red);}
+  .tech-card h4{color:var(--white);font-size:16px;margin:14px 0 10px;font-weight:500;}
+  .tech-card p{color:var(--white);opacity:.68;font-size:13px;}
+
+  /* ===== METHODOLOGY — clauses ===== */
+  .methodology{padding:130px 0;}
+  .methodology .wrap > .clause, .methodology .wrap > h2{max-width:640px;}
+  .clause-list{margin-top:56px;}
+  .clause-item{display:grid;grid-template-columns:100px 1fr;gap:40px;padding:38px 0;border-top:1px solid var(--line);}
+  .clause-item:last-child{border-bottom:1px solid var(--line);}
+  .roman{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--red);font-weight:500;}
+  .clause-item h3{font-size:19px;margin-bottom:10px;font-weight:500;}
+  .clause-item p{font-size:15px;max-width:600px;}
+
+  /* ===== CAREER ===== */
+  .career{background:var(--blue);color:var(--white);}
+  .career .wrap{padding:70px 40px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;border-top:3px solid var(--red);}
+  .career h2{color:var(--white);margin-bottom:10px;font-size:clamp(24px,2.8vw,32px);}
+  .career p{color:var(--white);opacity:.72;max-width:420px;}
+
+  /* ===== NEWSLETTER ===== */
+  .newsletter{padding:60px 0;border-bottom:1px solid var(--line);}
+  .newsletter .wrap{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+  .newsletter h3{font-size:20px;font-weight:500;margin-bottom:6px;}
+  .newsletter p{font-size:14px;}
+  .newsletter-form{display:flex;align-items:flex-end;gap:0;border-bottom:1.5px solid var(--blue);min-width:340px;}
+  .newsletter-form input{
+    flex:1;border:none;background:transparent;padding:10px 4px;font-family:var(--sans);font-size:15px;color:var(--blue);
+  }
+  .newsletter-form input:focus{outline:none;}
+  .newsletter-form input::placeholder{color:var(--muted);}
+  .newsletter-form button{background:none;border:none;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--red);cursor:pointer;padding:10px 6px;display:flex;align-items:center;gap:6px;}
+  .newsletter-form button svg{width:13px;height:13px;transition:transform .22s ease;}
+  .newsletter-form button:hover svg{transform:translateX(3px);}
+  .newsletter-msg{margin-top:12px;font-size:13px;font-family:var(--mono);color:var(--red);display:none;}
+
+  /* ===== CONTACT ===== */
+  .contact{padding:130px 0;}
+  .contact .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;}
+  .contact-info h2{margin-bottom:16px;}
+  .contact-info .lede{margin-bottom:40px;}
+  .info-block{padding:20px 0;border-top:1px solid var(--line);}
+  .info-block:last-child{border-bottom:1px solid var(--line);}
+  .info-block strong{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+  .info-block span{font-family:var(--sans);font-size:14.5px;font-weight:500;opacity:.9;}
+
+  form.contact-form{display:flex;flex-direction:column;gap:30px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+  .field{position:relative;}
+  .field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;}
+  .field input,.field textarea{
+    width:100%;border:none;border-bottom:1.5px solid var(--line);background:transparent;
+    font-family:var(--sans);font-size:15.5px;color:var(--blue);padding:8px 2px 12px;
+    transition:border-color .2s ease;
+  }
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);}
+  .field textarea{resize:vertical;min-height:90px;}
+  .contact-form .btn{align-self:flex-start;margin-top:6px;}
+  .form-msg{font-family:var(--mono);font-size:13px;color:var(--red);display:none;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--blue);color:var(--white);padding-top:80px;}
+  .footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:50px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,0.16);}
+  .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+  .footer-brand span{font-family:var(--serif);font-size:19px;font-weight:500;}
+  .footer-col p{color:var(--white);opacity:.68;font-size:14px;max-width:260px;}
+  .footer-col h4{color:rgba(255,255,255,0.55);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;font-weight:400;}
+  .footer-col ul li{margin-bottom:12px;}
+  .footer-col ul li a{font-size:14px;color:var(--white);opacity:.78;}
+  .footer-col ul li a:hover{opacity:1;color:var(--red);}
+  .social{display:flex;gap:10px;margin-top:22px;}
+  .social a{width:32px;height:32px;border:1px solid rgba(255,255,255,0.28);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;}
+  .social a:hover{border-color:var(--red);background:var(--red);}
+  .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:24px 0;font-family:var(--mono);font-size:12px;opacity:.6;}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:1100px){
+    .wrap{padding:0 32px;}
+    .nav-inner{padding:0 32px;}
+  }
+
+  /* ===== NAV: switch to mobile menu earlier so items never overflow/squeeze on tablets ===== */
+  @media (max-width:1024px){
+    .nav-inner{gap:12px;}
+    nav.primary{
+      position:fixed;top:0;left:0;right:0;bottom:0;background:var(--white);
+      flex-direction:column;justify-content:flex-start;
+      padding:100px 26px 40px;transform:translateX(100%);
+      transition:transform .32s cubic-bezier(.16,1,.3,1);overflow-y:auto;z-index:900;
+    }
+    nav.primary.open{transform:translateX(0);}
+    nav.primary > ul{flex-direction:column;align-items:stretch;width:100%;gap:0;flex-wrap:wrap;}
+    nav.primary > ul > li{width:100%;}
+    nav.primary > ul > li > a, nav.primary > ul > li > button{
+      width:100%;padding:17px 4px;font-size:16.5px;justify-content:space-between;
+      border-bottom:1px solid var(--line);
+    }
+    nav.primary > ul > li > a::after{display:none;}
+    .dropdown{
+      position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:none;
+      display:none;padding:4px 0 4px 14px;min-width:0;width:100%;
+    }
+    li.has-drop.open .dropdown{display:block;}
+    li.has-drop.open .caret{transform:rotate(180deg);}
+    .dropdown a{padding:13px 6px;border-bottom:none;}
+    .nav-cta{display:none;}
+    .burger{display:flex;}
+    body.nav-open{overflow:hidden;}
+  }
+
+  @media (max-width:980px){
+    section{padding-top:96px !important;padding-bottom:96px !important;}
+    .hero{padding-top:64px !important;padding-bottom:0 !important;}
+    .hero-top{max-width:100%;gap:40px;}
+    .hero-strip{grid-template-columns:repeat(2,1fr);}
+    .hero-strip div:nth-child(2n){border-right:none;}
+    .about .wrap{grid-template-columns:1fr;gap:44px;}
+    .service-board{grid-template-columns:repeat(2,1fr);}
+    .solution-board{grid-template-columns:repeat(2,1fr);}
+    .tech-grid{grid-template-columns:repeat(2,1fr);}
+    .clause-item{grid-template-columns:70px 1fr;gap:26px;}
+    .contact .wrap{grid-template-columns:1fr;gap:50px;}
+    .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
+  }
+  @media (max-width:760px){
+    .nav-inner{padding:0 22px;height:70px;}
+    .wrap{padding:0 22px;}
+    section{padding-top:72px !important;padding-bottom:72px !important;}
+    .hero{padding-top:48px !important;}
+    .hero h1{font-size:clamp(30px,9vw,44px);}
+    .hero-ctas{flex-direction:column;align-items:stretch;}
+    .hero-ctas .btn{justify-content:center;}
+    nav.primary{padding-top:86px;}
+    .hero-strip{grid-template-columns:1fr 1fr;}
+    .hero-strip div{padding:20px 0;}
+    .about-quote{font-size:22px;}
+    .service-board{grid-template-columns:1fr;}
+    .solution-board{grid-template-columns:1fr;}
+    .tech-grid{grid-template-columns:1fr 1fr;}
+    .clause-item{grid-template-columns:1fr;gap:12px;padding:28px 0;}
+    .roman{font-size:26px;}
+    .form-row{grid-template-columns:1fr;gap:22px;}
+    .newsletter .wrap{flex-direction:column;align-items:stretch;}
+    .newsletter-form{min-width:0;width:100%;}
+    .footer-top{grid-template-columns:1fr;gap:36px;padding-bottom:40px;}
+    .footer-bottom{flex-direction:column;gap:8px;}
+    .career .wrap{flex-direction:column;align-items:flex-start;padding:44px 22px;gap:22px;}
+    .career .wrap .btn{width:100%;justify-content:center;}
+  }
+  @media (max-width:480px){
+    .tech-grid{grid-template-columns:1fr;}
+    .hero-strip{grid-template-columns:1fr;}
+    .hero-strip div{border-right:none !important;border-bottom:1px solid var(--line);}
+    .hero-strip div:last-child{border-bottom:none;}
+    h2{font-size:26px;}
+    .brand-text{font-size:16px;}
+    .brand-text small{display:none;}
+  }
+</style>
+</head>
+<body>
+
+
+<div class="progress" id="progressBar"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="site">
+  <div class="nav-inner">
+    <a href="#home" class="brand">
+      <img src="assets/Logo_Transparent.png" alt="Techrapo Solutions Private Limited" class="seal">
+      <span class="brand-text">Techrapo Solutions</span>
+    </a>
+
+    <nav class="primary" id="primaryNav">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#career">Career</a></li>
+        <li class="has-drop">
+          <button type="button">Service
+            <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#1A579E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown">
+            <a href="#services"><span class="idx">01</span>Web Development</a>
+            <a href="#services"><span class="idx">02</span>Software Development</a>
+            <a href="#services"><span class="idx">03</span>Outsourcing &amp; Consulting</a>
+            <a href="#services"><span class="idx">04</span>System Integration</a>
+            <a href="#services"><span class="idx">05</span>IT Outsourcing</a>
+            <a href="#services"><span class="idx">06</span>Application Services</a>
+          </div>
+        </li>
+        <li><a href="#solutions">Solution</a></li>
+        <li><a href="#technology">Technology</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+        <li class="has-drop">
+          <button type="button">Other
+            <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#1A579E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown">
+            <a href="#about"><span class="idx">—</span>About</a>
+            <a href="#contact"><span class="idx">—</span>Contact Us</a>
+            <a href="#career"><span class="idx">—</span>Find a Job</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="nav-cta">
+      <a href="#contact" class="btn-nav"><span class="status"></span><span class="label">Request a Consultation</span></a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-top">
+      <div>
+        <div class="clause"><span class="mark">§</span> Consulting · IT Outsourcing · Technical Management</div>
+        <h1>Enterprise systems,<br>engineered with <em>rigour.</em></h1>
+        <p class="lede">Techrapo Solutions Private Limited partners with organizations across the full product lifecycle — from research and development through quality assurance, integration and long-term support.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-fill">Request a Consultation <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#services" class="btn btn-line">View Services</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-strip">
+      <div><strong>06</strong><span>Core Services</span></div>
+      <div><strong>05</strong><span>Enterprise Solutions</span></div>
+      <div><strong>05</strong><span>Technology Practices</span></div>
+      <div><strong>02</strong><span>India Offices</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="about-quote">
+        <span class="num">§ 01 — About the Firm</span>
+        “What began as a small outsourcing practice has risen to become a pioneer in IT solutions.”
+      </div>
+    </div>
+    <div class="about-body reveal">
+      <p>Techrapo Solutions Private Limited was established in 2019, initially focused on outsourcing and consulting services with the intention of producing enormous business volumes by binding the power of web and technology.</p>
+      <p>The firm now offers a wide spectrum of services including web development, software development, BPO, outsourcing and consulting — built on a foundation of process discipline and measurable delivery.</p>
+      <div class="about-table">
+        <div><span>Founded</span><span>2019</span></div>
+        <div><span>Headquarters</span><span>Madhapur, Hyderabad</span></div>
+        <div><span>Secondary Office</span><span>Jayanagar, Bangalore</span></div>
+        <div><span>Registration</span><span>GSTIN 36AAHCT8631L1ZT</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="clause reveal"><span class="mark">§</span> 02 — Schedule of Services</div>
+    <h2 class="reveal">Six practices, one accountable partner.</h2>
+
+    <div class="service-board reveal">
+      <div class="service-card">
+        <span class="idx">01</span>
+        <h3>Web Development</h3>
+        <p>Building and supporting robust, high-capacity web applications and information systems for organizations with online business models.</p>
+      </div>
+      <div class="service-card">
+        <span class="idx">02</span>
+        <h3>Software Development</h3>
+        <p>Undertaking application development projects across the full lifecycle of software development, or any part of it.</p>
+      </div>
+      <div class="service-card">
+        <span class="idx">03</span>
+        <h3>Outsourcing &amp; Consulting</h3>
+        <p>Helping organizations navigate an increasingly complex technology landscape, brought on by the continuous progression of technology itself.</p>
+      </div>
+      <div class="service-card">
+        <span class="idx">04</span>
+        <h3>System Integration</h3>
+        <p>Resolving the confusion, inefficiency and decreased productivity that arise when one enterprise runs multiple, disconnected IT systems.</p>
+      </div>
+      <div class="service-card">
+        <span class="idx">05</span>
+        <h3>IT Outsourcing</h3>
+        <p>Ensuring quality delivery of solutions even 1,000 miles away, across multiple time zones, through strict adherence to process.</p>
+      </div>
+      <div class="service-card">
+        <span class="idx">06</span>
+        <h3>Application Services</h3>
+        <p>Serving the business needs of an extensive range of industry verticals with focused, enterprise-grade solutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUTIONS ===== -->
+<section class="solutions" id="solutions">
+  <div class="wrap">
+    <div class="clause reveal"><span class="mark">§</span> 03 — Enterprise Solutions</div>
+    <h2 class="reveal">Platforms we build and integrate on.</h2>
+
+    <div class="solution-board reveal">
+      <div class="solution-card">
+        <span class="dot"></span>
+        <h4>SAP</h4>
+        <p>Over 100,000 companies worldwide run SAP solutions. Getting the most from an SAP-based system requires seamless integration and smooth deployment.</p>
+      </div>
+      <div class="solution-card">
+        <span class="dot"></span>
+        <h4>Cloud / SaaS</h4>
+        <p>We've built, hosted and deployed cloud and SOA-based infrastructures for clients handling an ever-increasing number of interactions and transactions.</p>
+      </div>
+      <div class="solution-card">
+        <span class="dot"></span>
+        <h4>Embedded Systems</h4>
+        <p>High-tech products continue to have significant impact on comfort, convenience and productivity through smart, efficient devices.</p>
+      </div>
+      <div class="solution-card">
+        <span class="dot"></span>
+        <h4>SAS</h4>
+        <p>Combining intelligent search, information access and data integration with intuitive visual analytics to predict, prevent and respond to threats.</p>
+      </div>
+      <div class="solution-card">
+        <span class="dot"></span>
+        <h4>Testing</h4>
+        <p>A dedicated Testing Services unit with a comprehensive portfolio that assures measurable business outcomes through improved quality processes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECHNOLOGY ===== -->
+<section class="technology" id="technology">
+  <div class="wrap">
+    <div class="clause reveal"><span class="mark">§</span> 04 — Technology Practices</div>
+    <h2 class="reveal">Global technology, applied locally.</h2>
+    <div class="tech-grid reveal">
+      <div class="tech-card"><span>MS</span><h4>Microsoft</h4><p>A large pool of engineers focused on .NET, backed by our Microsoft Competency Center Lab.</p></div>
+      <div class="tech-card"><span>JV</span><h4>Java / J2EE</h4><p>Architecture, assessment, application development, deployment and maintenance.</p></div>
+      <div class="tech-card"><span>MW</span><h4>Middleware</h4><p>Configuration, design and implementation of Enterprise Application Integration using webMethods.</p></div>
+      <div class="tech-card"><span>W2</span><h4>Web 2.0</h4><p>Quickstarting your Web 2.0 initiative, supported by SaaS and PaaS.</p></div>
+      <div class="tech-card"><span>OR</span><h4>Oracle</h4><p>ERP, CRM, SEM and DSS lifecycle implementation for the Oracle application suite.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== METHODOLOGY ===== -->
+<section class="methodology" id="methodology">
+  <div class="wrap">
+    <div class="clause reveal"><span class="mark">§</span> 05 — Methodology</div>
+    <h2 class="reveal">How engagements are governed.</h2>
+
+    <div class="clause-list reveal">
+      <div class="clause-item">
+        <span class="roman">I</span>
+        <div>
+          <h3>Project Management</h3>
+          <p>As soon as a project is authorized, the designated Project Manager begins detailed planning — a Project Management Plan, Configuration Management Plan, Risk Management Plan, Technical Plan and Quality Plan.</p>
+        </div>
+      </div>
+      <div class="clause-item">
+        <span class="roman">II</span>
+        <div>
+          <h3>Support</h3>
+          <p>Customer support is treated with the same seriousness as development, backed by a mature process for the capture, reporting and tracking of issues.</p>
+        </div>
+      </div>
+      <div class="clause-item">
+        <span class="roman">III</span>
+        <div>
+          <h3>Quality Management</h3>
+          <p>Quality programs deliver efficiencies that reduce cost, improve cycle time and apply tools quantitatively to assure the highest quality deliverable.</p>
+        </div>
+      </div>
+      <div class="clause-item">
+        <span class="roman">IV</span>
+        <div>
+          <h3>Technical Management</h3>
+          <p>Software Project Planning establishes reasonable plans for performing the engineering work and managing the project end to end.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAREER ===== -->
+<section class="career" id="career">
+  <div class="wrap">
+    <div>
+      <h2>Build the systems with us.</h2>
+      <p>We're always looking for engineers, consultants and project managers who want to work across the full product lifecycle.</p>
+    </div>
+    <a href="#contact" class="btn btn-line-white">Find a Job</a>
+  </div>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<section class="newsletter">
+  <div class="wrap">
+    <div>
+      <h3>Stay informed</h3>
+      <p>Occasional notes on our services, solutions and open roles.</p>
+    </div>
+    <div>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit">Subscribe <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+      <div class="newsletter-msg" id="newsletterMsg">— Thank you, you're subscribed.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-info reveal">
+      <div class="clause"><span class="mark">§</span> 06 — Contact</div>
+      <h2>Let's start your business.</h2>
+      <p class="lede">Reach out and our team will get back to you shortly.</p>
+
+      <div class="info-block">
+        <strong>Hyderabad Office</strong>
+        <span>3rd Floor, Capitol Tower, Plot No: 1, Khanamet, Beside N Convention, Madhapur, Hyderabad – 500 081, Telangana, India</span>
+      </div>
+      <div class="info-block">
+        <strong>Bangalore Office</strong>
+        <span>C/o. Lorven Coworks, No. 76 (Old No. 756), 3rd Floor, 10th Main Road, Jayanagar, 4th Block, Bangalore – 560011, Karnataka, India</span>
+      </div>
+      <div class="info-block">
+        <strong>Phone &amp; Email</strong>
+        <span>+91 90635 43630 · info@techrapo.com</span>
+      </div>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm">
+      <div class="form-row">
+        <div class="field">
+          <label for="fname">Full Name</label>
+          <input id="fname" type="text" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="femail">Email</label>
+          <input id="femail" type="email" placeholder="you@company.com" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="fsubject">Subject</label>
+        <input id="fsubject" type="text" placeholder="How can we help?" required>
+      </div>
+      <div class="field">
+        <label for="fmessage">Message</label>
+        <textarea id="fmessage" placeholder="Tell us about your project..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-fill">Send Message <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="form-msg" id="formMsg">— Thank you, we'll be in touch shortly.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <svg class="seal" viewBox="0 0 44 44" fill="none">
+            <circle cx="22" cy="22" r="20.5" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1.2"/>
+            <circle cx="22" cy="22" r="16.5" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
+            <path d="M13 15h9a4.5 4.5 0 0 1 0 9h-2.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M19.5 24V31" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="29.5" cy="15.5" r="2.1" fill="#ED1B23"/>
+          </svg>
+          <span>Techrapo Solutions</span>
+        </div>
+        <p>Consulting Services, IT Outsourcing and Technical Management — established 2019, Hyderabad, India.</p>
+        <div class="social">
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="LinkedIn">IN</a>
+          <a href="#" aria-label="Twitter">TW</a>
+          <a href="#" aria-label="Google">G</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Corporate</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#solutions">Solutions</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Web Development</a></li>
+          <li><a href="#services">Software Development</a></li>
+          <li><a href="#services">Outsourcing &amp; Consulting</a></li>
+          <li><a href="#services">System Integration</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="#technology">Technology</a></li>
+          <li><a href="#methodology">Methodology</a></li>
+          <li><a href="#career">Find a Job</a></li>
+          <li><a href="#services">Application Services</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Techrapo Solutions Private Limited. All Rights Reserved.</span>
+      <span>GSTIN: 36AAHCT8631L1ZT</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // scroll progress
+  const bar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = pct + '%';
+  });
+
+  // mobile menu
+  const burger = document.getElementById('burgerBtn');
+  const nav = document.getElementById('primaryNav');
+
+  function closeMenu(){
+    nav.classList.remove('open');
+    burger.classList.remove('active');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-open');
+    document.querySelectorAll('li.has-drop.open').forEach(li => li.classList.remove('open'));
+  }
+  function toggleMenu(){
+    const isOpen = nav.classList.toggle('open');
+    burger.classList.toggle('active', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+    document.body.classList.toggle('nav-open', isOpen);
+  }
+
+  burger.addEventListener('click', toggleMenu);
+
+  document.querySelectorAll('.has-drop > button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (window.innerWidth <= 1024) btn.parentElement.classList.toggle('open');
+    });
+  });
+
+  document.querySelectorAll('nav.primary a').forEach(a => a.addEventListener('click', closeMenu));
+
+  window.addEventListener('resize', () => { if (window.innerWidth > 1024) closeMenu(); });
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // newsletter form
+  document.getElementById('newsletterForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('newsletterMsg').style.display = 'block';
+    this.reset();
+  });
+  // contact form
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('formMsg').style.display = 'block';
+    this.reset();
+  });
+</script>
+</body>
+</html>

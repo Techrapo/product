@@ -52,7 +52,6 @@
     font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:var(--muted);
     margin-bottom:20px;text-transform:uppercase;
   }
-  .clause .mark{color:var(--red);font-weight:500;}
   .clause::after{content:"";flex:0 0 40px;height:1px;background:var(--line);}
 
   h1,h2,h3,h4{font-family:var(--serif);color:var(--black);font-weight:500;letter-spacing:-.01em;}
@@ -80,9 +79,16 @@
 
   /* ===== HEADER ===== */
   header.site{
-    position:sticky;top:0;z-index:1000;background:rgba(255,255,255,0.94);
-    backdrop-filter:blur(10px);
+    position:sticky;top:0;z-index:1000;
     border-bottom:1px solid var(--line);
+  }
+  /* backdrop-filter lives on a pseudo-element, NOT on header itself —
+     backdrop-filter/transform/filter on an ancestor makes it the
+     containing block for position:fixed descendants, which was breaking
+     the full-screen mobile nav panel on phones. */
+  header.site::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:rgba(255,255,255,0.94);backdrop-filter:blur(10px);
   }
   .nav-inner{max-width:1240px;margin:0 auto;padding:0 40px;height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
   .brand{display:flex;align-items:center;gap:12px;flex-shrink:0;}
@@ -211,7 +217,6 @@
   .technology{padding:130px 0;background:var(--blue);color:var(--white);}
   .technology .clause{color:rgba(255,255,255,0.65);}
   .technology .clause::after{background:rgba(255,255,255,0.25);}
-  .technology .clause .mark{color:var(--red);}
   .technology h2{color:var(--white);max-width:600px;}
   .tech-grid{margin-top:56px;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,0.18);border-left:1px solid rgba(255,255,255,0.18);}
   .tech-card{border-right:1px solid rgba(255,255,255,0.18);border-bottom:1px solid rgba(255,255,255,0.18);padding:30px 22px;transition:background .25s ease;}
@@ -385,8 +390,8 @@
 <header class="site">
   <div class="nav-inner">
     <a href="#home" class="brand">
-      <img src="Logo_Transparent.png" alt="Techrapo Solutions Private Limited" class="seal">
-      <span class="brand-text">Techrapo Solutions</span>
+      <img src="logo.png" alt="Techrapo Solutions Private Limited" class="seal">
+      <span class="brand-text">Techrapo Solutions<small>Private Limited · Est. 2019</small></span>
     </a>
 
     <nav class="primary" id="primaryNav">
@@ -435,7 +440,7 @@
   <div class="wrap">
     <div class="hero-top">
       <div>
-        <div class="clause"><span class="mark">§</span> Consulting · IT Outsourcing · Technical Management</div>
+        <div class="clause">Consulting · IT Outsourcing · Technical Management</div>
         <h1>Enterprise systems,<br>engineered with <em>rigour.</em></h1>
         <p class="lede">Techrapo Solutions Private Limited partners with organizations across the full product lifecycle — from research and development through quality assurance, integration and long-term support.</p>
         <div class="hero-ctas">
@@ -459,7 +464,7 @@
   <div class="wrap">
     <div class="reveal">
       <div class="about-quote">
-        <span class="num">§ 01 — About the Firm</span>
+        <span class="num">01 — About the Firm</span>
         “What began as a small outsourcing practice has risen to become a pioneer in IT solutions.”
       </div>
     </div>
@@ -479,7 +484,7 @@
 <!-- ===== SERVICES ===== -->
 <section class="services" id="services">
   <div class="wrap">
-    <div class="clause reveal"><span class="mark">§</span> 02 — Schedule of Services</div>
+    <div class="clause reveal">02 — Schedule of Services</div>
     <h2 class="reveal">Six practices, one accountable partner.</h2>
 
     <div class="service-board reveal">
@@ -520,7 +525,7 @@
 <!-- ===== SOLUTIONS ===== -->
 <section class="solutions" id="solutions">
   <div class="wrap">
-    <div class="clause reveal"><span class="mark">§</span> 03 — Enterprise Solutions</div>
+    <div class="clause reveal">03 — Enterprise Solutions</div>
     <h2 class="reveal">Platforms we build and integrate on.</h2>
 
     <div class="solution-board reveal">
@@ -556,7 +561,7 @@
 <!-- ===== TECHNOLOGY ===== -->
 <section class="technology" id="technology">
   <div class="wrap">
-    <div class="clause reveal"><span class="mark">§</span> 04 — Technology Practices</div>
+    <div class="clause reveal">04 — Technology Practices</div>
     <h2 class="reveal">Global technology, applied locally.</h2>
     <div class="tech-grid reveal">
       <div class="tech-card"><span>MS</span><h4>Microsoft</h4><p>A large pool of engineers focused on .NET, backed by our Microsoft Competency Center Lab.</p></div>
@@ -571,7 +576,7 @@
 <!-- ===== METHODOLOGY ===== -->
 <section class="methodology" id="methodology">
   <div class="wrap">
-    <div class="clause reveal"><span class="mark">§</span> 05 — Methodology</div>
+    <div class="clause reveal">05 — Methodology</div>
     <h2 class="reveal">How engagements are governed.</h2>
 
     <div class="clause-list reveal">
@@ -639,7 +644,7 @@
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="contact-info reveal">
-      <div class="clause"><span class="mark">§</span> 06 — Contact</div>
+      <div class="clause">06 — Contact</div>
       <h2>Let's start your business.</h2>
       <p class="lede">Reach out and our team will get back to you shortly.</p>
 

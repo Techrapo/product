@@ -896,13 +896,17 @@
   // 1. Paste your deployed Apps Script Web App URL below (see setup instructions provided separately).
   const SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbw_Iw3yP2p-2bFlimv3KJSCJSOiSEleJ-WT8HgivzqKHOY4-DbjUyAOgH_yRFsl2r1OAQ/exec';
 
+  // Fire-and-forget: Apps Script web apps can take a couple of seconds to
+  // respond (cold start) and mode:'no-cors' means we can't read the response
+  // anyway, so we don't make the user wait on it — the UI updates instantly
+  // and this request just runs quietly in the background.
   function sendToSheet(payload){
-    return fetch(SHEET_WEBAPP_URL, {
+    fetch(SHEET_WEBAPP_URL, {
       method: 'POST',
-      mode: 'no-cors', // Apps Script web apps don't return readable CORS headers; fire-and-forget
+      mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight
       body: JSON.stringify(payload)
-    });
+    }).catch(err => console.error('Sheet submission failed:', err));
   }
 
   // newsletter form
@@ -910,23 +914,20 @@
   const newsletterMsg = document.getElementById('newsletterMsg');
   newsletterForm.addEventListener('submit', function(e){
     e.preventDefault();
-    const email = this.querySelector('input[type="email"]').value.trim();
+    const emailInput = this.querySelector('input[type="email"]');
+    const email = emailInput.value.trim();
+    if (!email) return;
+
     const btn = this.querySelector('button');
-    const originalLabel = btn.innerHTML;
     btn.disabled = true;
 
-    sendToSheet({ formType: 'newsletter', email: email })
-      .then(() => {
-        newsletterMsg.textContent = "— Thank you, you're subscribed.";
-        newsletterMsg.style.color = '';
-        newsletterMsg.style.display = 'block';
-        newsletterForm.reset();
-      })
-      .catch(() => {
-        newsletterMsg.textContent = '— Something went wrong. Please try again.';
-        newsletterMsg.style.display = 'block';
-      })
-      .finally(() => { btn.disabled = false; btn.innerHTML = originalLabel; });
+    sendToSheet({ formType: 'newsletter', email: email });
+
+    newsletterMsg.textContent = "— Thank you, you're subscribed.";
+    newsletterMsg.style.display = 'block';
+    newsletterForm.reset();
+
+    setTimeout(() => { btn.disabled = false; }, 800);
   });
 
   // contact form
@@ -952,23 +953,19 @@
       subject: document.getElementById('fsubject').value.trim(),
       message: document.getElementById('fmessage').value.trim()
     };
+
     const btn = this.querySelector('button[type="submit"]');
-    const originalLabel = btn.innerHTML;
     btn.disabled = true;
 
-    sendToSheet(payload)
-      .then(() => {
-        formMsg.textContent = "— Thank you, we'll be in touch shortly.";
-        formMsg.style.color = '';
-        formMsg.style.display = 'block';
-        contactForm.reset();
-        phoneCode.textContent = '+91';
-      })
-      .catch(() => {
-        formMsg.textContent = '— Something went wrong. Please try again.';
-        formMsg.style.display = 'block';
-      })
-      .finally(() => { btn.disabled = false; btn.innerHTML = originalLabel; });
+    sendToSheet(payload);
+
+    formMsg.textContent = "— Thank you, we'll be in touch shortly.";
+    formMsg.style.display = 'block';
+    contactForm.reset();
+    phoneCode.textContent = '+91';
+    setPhoneLimit(10);
+
+    setTimeout(() => { btn.disabled = false; }, 800);
   });
 </script>
 </body>

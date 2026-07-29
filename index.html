@@ -673,6 +673,16 @@
           <input id="femail" type="email" placeholder="you@company.com" required>
         </div>
       </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="fphone">Phone Number</label>
+          <input id="fphone" type="tel" placeholder="+91 90000 00000" required>
+        </div>
+        <div class="field">
+          <label for="fcountry">Country</label>
+          <input id="fcountry" type="text" placeholder="India" required>
+        </div>
+      </div>
       <div class="field">
         <label for="fsubject">Subject</label>
         <input id="fsubject" type="text" placeholder="How can we help?" required>
@@ -836,6 +846,8 @@
       formType: 'contact',
       name: document.getElementById('fname').value.trim(),
       email: document.getElementById('femail').value.trim(),
+      phone: document.getElementById('fphone').value.trim(),
+      country: document.getElementById('fcountry').value.trim(),
       subject: document.getElementById('fsubject').value.trim(),
       message: document.getElementById('fmessage').value.trim()
     };

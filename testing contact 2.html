@@ -292,20 +292,28 @@
         <span class="trcareer-error-msg">Please enter a valid @gmail.com or @yahoo.com email address.</span>
       </div>
 
+      <div class="trcareer-field" id="trcareer-field-experience">
+        <label for="trcareer-experience">Years of Experience <span class="trcareer-req">*</span></label>
+        <input type="text" inputmode="decimal" id="trcareer-experience" name="experience" placeholder="e.g. 0, 2.5, 8, 12.5" />
+        <span class="trcareer-error-msg">Please enter valid years of experience (e.g. 0, 2.5, 8).</span>
+      </div>
+    </div>
+
+    <div class="trcareer-row">
       <div class="trcareer-field" id="trcareer-field-current-location">
         <label for="trcareer-current-location">Current Location <span class="trcareer-req">*</span></label>
         <input type="text" id="trcareer-current-location" name="currentLocation" autocomplete="address-level2" />
         <span class="trcareer-error-msg">Please enter your current location.</span>
       </div>
-    </div>
 
-    <div class="trcareer-row">
       <div class="trcareer-field" id="trcareer-field-preferred-location">
         <label for="trcareer-preferred-location">Preferred Location <span class="trcareer-req">*</span></label>
         <input type="text" id="trcareer-preferred-location" name="preferredLocation" />
         <span class="trcareer-error-msg">Please enter your preferred location.</span>
       </div>
+    </div>
 
+    <div class="trcareer-row">
       <div class="trcareer-field" id="trcareer-field-notice-period">
         <label for="trcareer-notice-period">Notice Period <span class="trcareer-req">*</span></label>
         <select id="trcareer-notice-period" name="noticePeriod" required>
@@ -339,7 +347,7 @@
     </div>
 
     <div class="trcareer-field" id="trcareer-field-job-id">
-      <label for="trcareer-job-id">Techrapo Job ID ( Job ID Can be Found in JD )<span class="trcareer-req">*</span></label>
+      <label for="trcareer-job-id">Techrapo Job ID <span class="trcareer-req">*</span></label>
       <input type="text" id="trcareer-job-id" name="jobId" placeholder="e.g. TRJ01, TRJ065" style="text-transform:uppercase" />
       <span class="trcareer-error-msg">Please enter a valid Techrapo Job ID (e.g. TRJ01).</span>
     </div>
@@ -452,6 +460,7 @@
       { id: 'trcareer-name', field: 'trcareer-field-name', check: v => v.trim().length > 0 },
       { id: 'trcareer-mobile', field: 'trcareer-field-mobile', check: v => /^[0-9]{10}$/.test(v.trim()) },
       { id: 'trcareer-email', field: 'trcareer-field-email', check: v => /^[^\s@]+@(gmail|yahoo)\.com$/i.test(v.trim()) },
+      { id: 'trcareer-experience', field: 'trcareer-field-experience', check: v => /^[0-9]+(\.[0-9]+)?$/.test(v.trim()) },
       { id: 'trcareer-current-location', field: 'trcareer-field-current-location', check: v => v.trim().length > 0 },
       { id: 'trcareer-preferred-location', field: 'trcareer-field-preferred-location', check: v => v.trim().length > 0 },
       { id: 'trcareer-notice-period', field: 'trcareer-field-notice-period', check: v => v.trim().length > 0 },
@@ -499,6 +508,7 @@
         name: document.getElementById('trcareer-name').value,
         mobile: document.getElementById('trcareer-mobile').value,
         email: document.getElementById('trcareer-email').value,
+        experience: document.getElementById('trcareer-experience').value,
         currentLocation: document.getElementById('trcareer-current-location').value,
         preferredLocation: document.getElementById('trcareer-preferred-location').value,
         noticePeriod: document.getElementById('trcareer-notice-period').value,

@@ -1,0 +1,456 @@
+<!-- ============================================================
+     TECHRAPO CAREERS FORM — WordPress embeddable block
+     Paste this entire block into a "Custom HTML" block (or an
+     Elementor "HTML" widget) on careers.techrapo.com.
+     All id/class names are prefixed with "trcareer-" to stay unique,
+     so they won't conflict with your WordPress theme/plugin CSS.
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  #trcareer-form-wrap, #trcareer-form-wrap * {
+    box-sizing: border-box;
+  }
+
+  #trcareer-form-wrap {
+    --trc-blue: #1A579E;
+    --trc-red: #ED1B23;
+    --trc-white: #FFFFFF;
+    --trc-black: #000000;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 40px;
+    background: var(--trc-white);
+    border: 1px solid #e2e2e2;
+    font-family: 'Libre Franklin', sans-serif;
+    color: var(--trc-black);
+  }
+
+  #trcareer-form-wrap .trcareer-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--trc-blue);
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+
+  #trcareer-form-wrap .trcareer-title {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin: 0 0 12px;
+    color: var(--trc-black);
+  }
+
+  #trcareer-form-wrap .trcareer-subtitle {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+    margin: 0 0 32px;
+  }
+
+  .trcareer-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .trcareer-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .trcareer-field label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--trc-black);
+  }
+
+  .trcareer-field label .trcareer-req {
+    color: var(--trc-red);
+  }
+
+  .trcareer-field input[type="text"],
+  .trcareer-field input[type="email"],
+  .trcareer-field input[type="tel"],
+  .trcareer-field textarea {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 15px;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.15s ease;
+    background: var(--trc-white);
+    color: var(--trc-black);
+  }
+
+  .trcareer-field input:focus,
+  .trcareer-field textarea:focus {
+    border-color: var(--trc-blue);
+  }
+
+  .trcareer-field textarea {
+    resize: vertical;
+    min-height: 110px;
+  }
+
+  .trcareer-field.trcareer-error input,
+  .trcareer-field.trcareer-error textarea {
+    border-color: var(--trc-red);
+  }
+
+  .trcareer-error-msg {
+    font-size: 12px;
+    color: var(--trc-red);
+    margin-top: 5px;
+    display: none;
+  }
+
+  .trcareer-field.trcareer-error .trcareer-error-msg {
+    display: block;
+  }
+
+  /* Resume upload */
+  #trcareer-resume-dropzone {
+    border: 1.5px dashed #b8b8b8;
+    border-radius: 2px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    background: #fafafa;
+  }
+
+  #trcareer-resume-dropzone:hover,
+  #trcareer-resume-dropzone.trcareer-dragover {
+    border-color: var(--trc-blue);
+    background: #f2f6fb;
+  }
+
+  #trcareer-resume-dropzone .trcareer-upload-icon {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    color: var(--trc-blue);
+    margin-bottom: 6px;
+  }
+
+  #trcareer-resume-dropzone .trcareer-upload-text {
+    font-size: 14px;
+    color: #333;
+  }
+
+  #trcareer-resume-dropzone .trcareer-upload-hint {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  #trcareer-resume-filename {
+    margin-top: 10px;
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--trc-blue);
+    display: none;
+  }
+
+  #trcareer-resume-filename.trcareer-visible {
+    display: block;
+  }
+
+  #trcareer-resume-input {
+    display: none;
+  }
+
+  .trcareer-submit-btn {
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    padding: 14px 32px;
+    background: var(--trc-blue);
+    color: var(--trc-white);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    margin-top: 8px;
+  }
+
+  .trcareer-submit-btn:hover {
+    background: #134278;
+  }
+
+  .trcareer-submit-btn:disabled {
+    background: #9aa9bb;
+    cursor: not-allowed;
+  }
+
+  #trcareer-status-msg {
+    margin-top: 18px;
+    font-size: 14px;
+    padding: 12px 16px;
+    border-radius: 2px;
+    display: none;
+  }
+
+  #trcareer-status-msg.trcareer-success {
+    display: block;
+    background: #eaf6ec;
+    color: #1e6b2e;
+    border: 1px solid #bfe3c5;
+  }
+
+  #trcareer-status-msg.trcareer-fail {
+    display: block;
+    background: #fdeeee;
+    color: var(--trc-red);
+    border: 1px solid #f5c2c2;
+  }
+
+  @media (max-width: 640px) {
+    #trcareer-form-wrap {
+      padding: 32px 20px;
+    }
+    .trcareer-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    #trcareer-form-wrap .trcareer-title {
+      font-size: 22px;
+    }
+  }
+</style>
+
+<div id="trcareer-form-wrap">
+  <p class="trcareer-eyebrow">01 — Careers</p>
+  <h2 class="trcareer-title">Apply to Techrapo</h2>
+  <p class="trcareer-subtitle">Submit your details and resume — our hiring team will review your application and get in touch.</p>
+
+  <form id="trcareer-form" novalidate>
+    <div class="trcareer-row">
+      <div class="trcareer-field" id="trcareer-field-name">
+        <label for="trcareer-name">Full Name <span class="trcareer-req">*</span></label>
+        <input type="text" id="trcareer-name" name="name" autocomplete="name" />
+        <span class="trcareer-error-msg">Please enter your name.</span>
+      </div>
+
+      <div class="trcareer-field" id="trcareer-field-mobile">
+        <label for="trcareer-mobile">Mobile Number <span class="trcareer-req">*</span></label>
+        <input type="tel" id="trcareer-mobile" name="mobile" autocomplete="tel" maxlength="10" placeholder="10-digit number" />
+        <span class="trcareer-error-msg">Please enter a valid 10-digit mobile number.</span>
+      </div>
+    </div>
+
+    <div class="trcareer-row">
+      <div class="trcareer-field" id="trcareer-field-city">
+        <label for="trcareer-city">City <span class="trcareer-req">*</span></label>
+        <input type="text" id="trcareer-city" name="city" autocomplete="address-level2" />
+        <span class="trcareer-error-msg">Please enter your city.</span>
+      </div>
+
+      <div class="trcareer-field" id="trcareer-field-email">
+        <label for="trcareer-email">Email <span class="trcareer-req">*</span></label>
+        <input type="email" id="trcareer-email" name="email" autocomplete="email" />
+        <span class="trcareer-error-msg">Please enter a valid email address.</span>
+      </div>
+    </div>
+
+    <div class="trcareer-field" id="trcareer-field-subject">
+      <label for="trcareer-subject">Subject / Position Applying For <span class="trcareer-req">*</span></label>
+      <input type="text" id="trcareer-subject" name="subject" placeholder="e.g. Software Developer, Staffing Executive" />
+      <span class="trcareer-error-msg">Please enter a subject.</span>
+    </div>
+
+    <div class="trcareer-field" id="trcareer-field-comment">
+      <label for="trcareer-comment">Comment / Message</label>
+      <textarea id="trcareer-comment" name="comment" placeholder="Tell us a bit about yourself (optional)"></textarea>
+    </div>
+
+    <div class="trcareer-field" id="trcareer-field-resume">
+      <label>Resume <span class="trcareer-req">*</span></label>
+      <div id="trcareer-resume-dropzone">
+        <div class="trcareer-upload-icon">⭱</div>
+        <div class="trcareer-upload-text">Click to upload or drag your resume file here</div>
+        <div class="trcareer-upload-hint">PDF, DOC, DOCX — max 5MB</div>
+      </div>
+      <input type="file" id="trcareer-resume-input" accept=".pdf,.doc,.docx" />
+      <div id="trcareer-resume-filename"></div>
+      <span class="trcareer-error-msg">Please upload your resume (PDF/DOC/DOCX, max 5MB).</span>
+    </div>
+
+    <button type="submit" class="trcareer-submit-btn" id="trcareer-submit-btn">Submit Application</button>
+
+    <div id="trcareer-status-msg"></div>
+  </form>
+</div>
+
+<script>
+(function () {
+  // ⚠️ Paste your Apps Script Web App URL here (the URL you get after deploying)
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOKAXgjY88V45Qf914MyYjVIaWPzM8IQLKctk6bqDRsN1IE3V1Sdo06xkpPOrKtvqVng/exec';
+
+  const form = document.getElementById('trcareer-form');
+  const submitBtn = document.getElementById('trcareer-submit-btn');
+  const statusMsg = document.getElementById('trcareer-status-msg');
+
+  const dropzone = document.getElementById('trcareer-resume-dropzone');
+  const fileInput = document.getElementById('trcareer-resume-input');
+  const fileNameDisplay = document.getElementById('trcareer-resume-filename');
+
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+  const ALLOWED_TYPES = ['.pdf', '.doc', '.docx'];
+
+  let selectedFile = null;
+
+  dropzone.addEventListener('click', () => fileInput.click());
+
+  dropzone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropzone.classList.add('trcareer-dragover');
+  });
+
+  dropzone.addEventListener('dragleave', () => {
+    dropzone.classList.remove('trcareer-dragover');
+  });
+
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('trcareer-dragover');
+    if (e.dataTransfer.files.length) {
+      handleFile(e.dataTransfer.files[0]);
+    }
+  });
+
+  fileInput.addEventListener('change', (e) => {
+    if (e.target.files.length) {
+      handleFile(e.target.files[0]);
+    }
+  });
+
+  function handleFile(file) {
+    const ext = '.' + file.name.split('.').pop().toLowerCase();
+    const fieldWrap = document.getElementById('trcareer-field-resume');
+
+    if (!ALLOWED_TYPES.includes(ext)) {
+      fieldWrap.classList.add('trcareer-error');
+      fieldWrap.querySelector('.trcareer-error-msg').textContent = 'Please upload a PDF, DOC, or DOCX file only.';
+      selectedFile = null;
+      fileNameDisplay.classList.remove('trcareer-visible');
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      fieldWrap.classList.add('trcareer-error');
+      fieldWrap.querySelector('.trcareer-error-msg').textContent = 'File size must be under 5MB.';
+      selectedFile = null;
+      fileNameDisplay.classList.remove('trcareer-visible');
+      return;
+    }
+
+    fieldWrap.classList.remove('trcareer-error');
+    selectedFile = file;
+    fileNameDisplay.textContent = '✓ ' + file.name;
+    fileNameDisplay.classList.add('trcareer-visible');
+  }
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function validate() {
+    let valid = true;
+
+    const fields = [
+      { id: 'trcareer-name', field: 'trcareer-field-name', check: v => v.trim().length > 0 },
+      { id: 'trcareer-mobile', field: 'trcareer-field-mobile', check: v => /^[0-9]{10}$/.test(v.trim()) },
+      { id: 'trcareer-city', field: 'trcareer-field-city', check: v => v.trim().length > 0 },
+      { id: 'trcareer-email', field: 'trcareer-field-email', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+      { id: 'trcareer-subject', field: 'trcareer-field-subject', check: v => v.trim().length > 0 }
+    ];
+
+    fields.forEach(f => {
+      const el = document.getElementById(f.id);
+      const wrap = document.getElementById(f.field);
+      if (!f.check(el.value)) {
+        wrap.classList.add('trcareer-error');
+        valid = false;
+      } else {
+        wrap.classList.remove('trcareer-error');
+      }
+    });
+
+    const resumeWrap = document.getElementById('trcareer-field-resume');
+    if (!selectedFile) {
+      resumeWrap.classList.add('trcareer-error');
+      resumeWrap.querySelector('.trcareer-error-msg').textContent = 'Please upload your resume (PDF/DOC/DOCX, max 5MB).';
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    statusMsg.className = '';
+    statusMsg.textContent = '';
+
+    if (!validate()) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    try {
+      const base64 = await fileToBase64(selectedFile);
+
+      const payload = {
+        name: document.getElementById('trcareer-name').value,
+        mobile: document.getElementById('trcareer-mobile').value,
+        city: document.getElementById('trcareer-city').value,
+        email: document.getElementById('trcareer-email').value,
+        subject: document.getElementById('trcareer-subject').value,
+        comment: document.getElementById('trcareer-comment').value,
+        resumeBase64: base64,
+        resumeFileName: selectedFile.name,
+        resumeMimeType: selectedFile.type
+      };
+
+      // fire-and-forget style (no-cors) — Apps Script cold-start delay valla
+      // response wait cheyakunda, form ni reset chesi user ki success chupistundi
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+
+      statusMsg.className = 'trcareer-success';
+      statusMsg.textContent = 'Your application has been submitted. Thank you — our team will get in touch with you soon.';
+
+      form.reset();
+      selectedFile = null;
+      fileNameDisplay.classList.remove('trcareer-visible');
+
+    } catch (err) {
+      statusMsg.className = 'trcareer-fail';
+      statusMsg.textContent = 'Submission failed. Please try again.';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Application';
+    }
+  });
+})();
+</script>

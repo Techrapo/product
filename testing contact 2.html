@@ -124,6 +124,83 @@
     border-color: var(--trc-red);
   }
 
+  /* Preferred Location - custom multi-select dropdown */
+  #trcareer-preferred-location-wrap {
+    position: relative;
+  }
+
+  #trcareer-preferred-location-trigger {
+    width: 100%;
+    text-align: left;
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 15px;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background: var(--trc-white);
+    color: var(--trc-black);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #trcareer-preferred-location-trigger.trcareer-open,
+  #trcareer-preferred-location-trigger:focus {
+    outline: none;
+    border-color: var(--trc-blue);
+  }
+
+  #trcareer-preferred-location-summary.trcareer-placeholder {
+    color: #888;
+  }
+
+  .trcareer-multiselect-arrow {
+    color: var(--trc-blue);
+    font-size: 12px;
+    margin-left: 8px;
+  }
+
+  #trcareer-preferred-location-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: var(--trc-white);
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    z-index: 20;
+    max-height: 220px;
+    overflow-y: auto;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  }
+
+  #trcareer-preferred-location-panel.trcareer-visible {
+    display: block;
+  }
+
+  .trcareer-checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 400;
+  }
+
+  .trcareer-checkbox-row:hover {
+    background: #f2f6fb;
+  }
+
+  .trcareer-checkbox-row input {
+    accent-color: var(--trc-blue);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
   .trcareer-error-msg {
     font-size: 12px;
     color: var(--trc-red);
@@ -302,14 +379,37 @@
     <div class="trcareer-row">
       <div class="trcareer-field" id="trcareer-field-current-location">
         <label for="trcareer-current-location">Current Location <span class="trcareer-req">*</span></label>
-        <input type="text" id="trcareer-current-location" name="currentLocation" autocomplete="address-level2" />
-        <span class="trcareer-error-msg">Please enter your current location.</span>
+        <select id="trcareer-current-location" name="currentLocation" required>
+          <option value="" disabled selected>Select current location</option>
+          <option value="Bengaluru">Bengaluru</option>
+          <option value="Hyderabad">Hyderabad</option>
+          <option value="Pune">Pune</option>
+          <option value="Kolkata">Kolkata</option>
+          <option value="Gurgaon">Gurgaon</option>
+          <option value="Noida">Noida</option>
+          <option value="Chennai">Chennai</option>
+        </select>
+        <span class="trcareer-error-msg">Please select your current location.</span>
       </div>
 
       <div class="trcareer-field" id="trcareer-field-preferred-location">
-        <label for="trcareer-preferred-location">Preferred Location <span class="trcareer-req">*</span></label>
-        <input type="text" id="trcareer-preferred-location" name="preferredLocation" />
-        <span class="trcareer-error-msg">Please enter your preferred location.</span>
+        <label for="trcareer-preferred-location-trigger">Preferred Locations <span class="trcareer-req">*</span></label>
+        <div id="trcareer-preferred-location-wrap">
+          <button type="button" id="trcareer-preferred-location-trigger">
+            <span id="trcareer-preferred-location-summary">Select preferred locations</span>
+            <span class="trcareer-multiselect-arrow">▾</span>
+          </button>
+          <div id="trcareer-preferred-location-panel">
+            <label class="trcareer-checkbox-row"><input type="checkbox" value="Bengaluru" class="trcareer-preferred-checkbox"> Bengaluru</label>
+            <label class="trcareer-checkbox-row"><input type="checkbox" value="Hyderabad" class="trcareer-preferred-checkbox"> Hyderabad</label>
+            <label class="trcareer-checkbox-row"><input type="checkbox" value="Pune" class="trcareer-preferred-checkbox"> Pune</label>
+            <label class="trcareer-checkbox-row"><input type="checkbox" value="Kolkata" class="trcareer-preferred-checkbox"> Kolkata</label>
+            <label class="trcareer-checkbox-row"><input type="checkbox" value="Gurgaon" class="trcareer-preferred-checkbox"> Gurgaon</label>
+            <label class="trcareer-checkbox-row"><input type="checkbox" value="Noida" class="trcareer-preferred-checkbox"> Noida</label>
+            <label class="trcareer-checkbox-row"><input type="checkbox" value="Chennai" class="trcareer-preferred-checkbox"> Chennai</label>
+          </div>
+        </div>
+        <span class="trcareer-error-msg">Please select at least one preferred location.</span>
       </div>
     </div>
 
@@ -390,6 +490,45 @@
 
   let selectedFile = null;
 
+  // Preferred Location - custom multi-select dropdown
+  const prefTrigger = document.getElementById('trcareer-preferred-location-trigger');
+  const prefPanel = document.getElementById('trcareer-preferred-location-panel');
+  const prefSummary = document.getElementById('trcareer-preferred-location-summary');
+  const prefCheckboxes = document.querySelectorAll('.trcareer-preferred-checkbox');
+
+  prefTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    prefPanel.classList.toggle('trcareer-visible');
+    prefTrigger.classList.toggle('trcareer-open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!document.getElementById('trcareer-preferred-location-wrap').contains(e.target)) {
+      prefPanel.classList.remove('trcareer-visible');
+      prefTrigger.classList.remove('trcareer-open');
+    }
+  });
+
+  prefCheckboxes.forEach(cb => {
+    cb.addEventListener('change', updatePreferredLocationSummary);
+  });
+
+  function updatePreferredLocationSummary() {
+    const selected = Array.from(prefCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+    if (selected.length === 0) {
+      prefSummary.textContent = 'Select preferred locations';
+      prefSummary.classList.add('trcareer-placeholder');
+    } else {
+      prefSummary.textContent = selected.join(', ');
+      prefSummary.classList.remove('trcareer-placeholder');
+    }
+    document.getElementById('trcareer-field-preferred-location').classList.remove('trcareer-error');
+  }
+
+  function getPreferredLocations() {
+    return Array.from(prefCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+  }
+
   chooseBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     fileInput.click();
@@ -462,7 +601,6 @@
       { id: 'trcareer-email', field: 'trcareer-field-email', check: v => /^[^\s@]+@(gmail|yahoo)\.com$/i.test(v.trim()) },
       { id: 'trcareer-experience', field: 'trcareer-field-experience', check: v => /^[0-9]+(\.[0-9]+)?$/.test(v.trim()) },
       { id: 'trcareer-current-location', field: 'trcareer-field-current-location', check: v => v.trim().length > 0 },
-      { id: 'trcareer-preferred-location', field: 'trcareer-field-preferred-location', check: v => v.trim().length > 0 },
       { id: 'trcareer-notice-period', field: 'trcareer-field-notice-period', check: v => v.trim().length > 0 },
       { id: 'trcareer-job-applying', field: 'trcareer-field-job-applying', check: v => v.trim().length > 0 },
       { id: 'trcareer-position', field: 'trcareer-field-position', check: v => v.trim().length > 0 },
@@ -485,6 +623,14 @@
       resumeWrap.classList.add('trcareer-error');
       resumeWrap.querySelector('.trcareer-error-msg').textContent = 'Please upload your resume (PDF/DOC/DOCX, max 5MB).';
       valid = false;
+    }
+
+    const prefWrap = document.getElementById('trcareer-field-preferred-location');
+    if (getPreferredLocations().length === 0) {
+      prefWrap.classList.add('trcareer-error');
+      valid = false;
+    } else {
+      prefWrap.classList.remove('trcareer-error');
     }
 
     return valid;
@@ -510,7 +656,7 @@
         email: document.getElementById('trcareer-email').value,
         experience: document.getElementById('trcareer-experience').value,
         currentLocation: document.getElementById('trcareer-current-location').value,
-        preferredLocation: document.getElementById('trcareer-preferred-location').value,
+        preferredLocation: getPreferredLocations().join(', '),
         noticePeriod: document.getElementById('trcareer-notice-period').value,
         jobApplyingFor: document.getElementById('trcareer-job-applying').value,
         position: document.getElementById('trcareer-position').value,
@@ -535,6 +681,8 @@
       form.reset();
       selectedFile = null;
       fileNameDisplay.classList.remove('trcareer-visible');
+      prefCheckboxes.forEach(cb => cb.checked = false);
+      updatePreferredLocationSummary();
 
     } catch (err) {
       statusMsg.className = 'trcareer-fail';

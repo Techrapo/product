@@ -58,6 +58,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
+            width: 100%;
         }
 
         /* Top Bar */
@@ -102,6 +103,7 @@
             justify-content: space-between;
             align-items: center;
             height: 80px;
+            position: relative;
         }
 
         .logo {
@@ -111,18 +113,22 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            z-index: 1001;
         }
 
-        .logo-icon {
+        .logo-icon, .logo span {
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .logo span {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
         }
 
         .nav-links {
@@ -167,7 +173,7 @@
         }
 
         .hero h1 {
-            font-size: 3.2rem;
+            font-size: clamp(2rem, 5vw, 3.2rem);
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 20px;
@@ -178,7 +184,7 @@
         }
 
         .hero p.subtitle {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--text-muted);
             margin-bottom: 40px;
             font-weight: 400;
@@ -190,7 +196,7 @@
         /* Feature Cards Overlapping Hero */
         .hero-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
             margin-top: -80px;
             position: relative;
@@ -252,13 +258,13 @@
 
         /* Section Styling */
         section {
-            padding: 100px 0;
+            padding: 80px 0;
             position: relative;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
         .section-header .tagline {
@@ -274,7 +280,7 @@
         }
 
         .section-header h2 {
-            font-size: 2.4rem;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
             font-weight: 700;
             color: #fff;
             letter-spacing: -0.5px;
@@ -284,7 +290,7 @@
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 40px;
             align-items: center;
         }
 
@@ -297,27 +303,29 @@
 
         .about-image img {
             width: 100%;
+            height: auto;
             border-radius: 16px;
             border: 1px solid var(--border-color);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: block;
         }
 
         /* Grid Layouts for Cards */
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
         }
 
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
         }
 
         .grid-4 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 24px;
         }
 
@@ -397,164 +405,15 @@
             font-weight: 500;
         }
 
-        /* Industries Section */
-        .industry-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: var(--transition);
-        }
-
-        .industry-card:hover {
-            border-color: var(--primary-glow);
-            background: var(--bg-card-hover);
-            transform: translateX(4px);
-        }
-
-        .industry-card i {
-            font-size: 1.5rem;
-            color: var(--primary-glow);
-        }
-
-        .industry-card h4 {
-            color: #fff;
-            font-size: 1.05rem;
-        }
-
-        /* Case Studies Section */
-        .case-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 32px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .case-tag {
-            display: inline-block;
-            background: rgba(0, 242, 254, 0.1);
-            color: var(--primary-glow);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            width: fit-content;
-        }
-
-        /* Testimonials Section */
-        .testimonial-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 32px;
-            position: relative;
-        }
-
-        .testimonial-card p {
-            color: var(--text-muted);
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-
-        .client-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .client-avatar {
-            width: 44px;
-            height: 44px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--bg-dark);
-            font-weight: 700;
-        }
-
-        /* Contact Section Form */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-
-        .contact-form {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 36px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #fff;
-            font-size: 0.9rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 16px;
-            background: var(--bg-dark);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: #fff;
-            font-family: inherit;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-glow);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            height: 120px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 14px;
-            background: var(--gradient-primary);
-            border: none;
-            border-radius: 8px;
-            color: var(--bg-dark);
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-submit:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
         /* Chatbot Styling */
         .chatbot-toggler {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 25px;
+            right: 25px;
             outline: none;
             border: none;
-            height: 60px;
-            width: 60px;
+            height: 55px;
+            width: 55px;
             display: flex;
             cursor: pointer;
             align-items: center;
@@ -568,7 +427,7 @@
 
         .chatbot-toggler i {
             color: var(--bg-dark);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             position: absolute;
         }
 
@@ -583,9 +442,10 @@
 
         .chatbot {
             position: fixed;
-            right: 30px;
-            bottom: 100px;
-            width: 380px;
+            right: 25px;
+            bottom: 95px;
+            width: 360px;
+            max-width: calc(100vw - 50px);
             background: var(--bg-card);
             border-radius: 16px;
             overflow: hidden;
@@ -630,7 +490,8 @@
 
         .chatbot .chatbox {
             overflow-y: auto;
-            height: 340px;
+            height: 320px;
+            max-height: 50vh;
             padding: 16px;
         }
 
@@ -721,121 +582,73 @@
             font-size: 1.2rem;
         }
 
-        /* Footer Section */
-        footer {
-            background-color: #060a12;
-            border-top: 1px solid var(--border-color);
-            padding: 80px 0 30px;
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .footer-column h4 {
-            color: #fff;
-            font-size: 1.1rem;
-            margin-bottom: 24px;
-            font-weight: 600;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-column ul li a {
-            color: var(--text-muted);
-            transition: var(--transition);
-            font-size: 0.95rem;
-        }
-
-        .footer-column ul li a:hover {
-            color: var(--primary-glow);
-        }
-
-        .contact-info li {
-            display: flex;
-            gap: 14px;
-            margin-bottom: 20px;
-            align-items: flex-start;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .contact-info i {
-            color: var(--primary-glow);
-            margin-top: 4px;
-            font-size: 1.1rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: #fff;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background: var(--gradient-primary);
-            color: var(--bg-dark);
-            border-color: transparent;
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid var(--border-color);
-            padding-top: 30px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                height: auto;
-                padding: 20px 0;
+            .container {
+                padding: 0 16px;
+            }
+
+            .top-bar .container {
+                justify-content: center;
+            }
+
+            .menu-toggle {
+                display: block;
             }
 
             .nav-links {
-                margin-top: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 16px;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(10, 15, 29, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                padding: 24px 0;
+                gap: 20px;
+                border-bottom: 1px solid var(--border-color);
+                clip-path: circle(0% at 100% 0);
+                transition: all 0.4s ease-in-out;
             }
 
-            .hero h1 {
-                font-size: 2.2rem;
+            .nav-links.active {
+                clip-path: circle(140% at 100% 0);
             }
 
-            .about-content, .contact-grid {
-                grid-template-columns: 1fr;
+            .hero {
+                padding: 80px 0 100px;
             }
 
             .hero-cards {
-                margin-top: 20px;
+                margin-top: -40px;
+            }
+
+            section {
+                padding: 60px 0;
             }
 
             .chatbot {
                 right: 15px;
-                bottom: 90px;
-                width: calc(100% - 30px);
+                bottom: 85px;
+                width: calc(100vw - 30px);
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-card, .card {
+                padding: 24px;
+            }
+
+            .stat-card .number {
+                font-size: 2.2rem;
             }
         }
     </style>
@@ -856,7 +669,10 @@
                 <div class="logo">
                     <i class="fas fa-microchip logo-icon"></i> Techrapo<span>Solutions</span>
                 </div>
-                <ul class="nav-links">
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links" id="nav-list">
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#solutions">Solutions</a></li>
@@ -1021,424 +837,56 @@
         </div>
     </section>
 
-    <!-- Technology Section -->
-    <section id="technology">
-        <div class="container">
-            <div class="section-header">
-                <span class="tagline">We focus on global technology</span>
-                <h2>Our Technology</h2>
-            </div>
-            <div class="grid-3">
-                <div class="card">
-                    <div class="card-icon"><i class="fab fa-windows"></i></div>
-                    <h3>Microsoft Technologies</h3>
-                    <p>We Techrapo Solutions Private Limited sustain a large pool of experienced engineers with major focus on .NET technology, leveraged by our Microsoft Competency Center Lab.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fab fa-java"></i></div>
-                    <h3>Java/J2EE</h3>
-                    <p>Techrapo Solutions Private Limited service offerings in Java technology span across architecture definition, assessment, application development, deployment & maintenance.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
-                    <h3>Middleware</h3>
-                    <p>Techrapo Solutions Private Limited has extensive experience in configuration, design, development, and implementation of Enterprise Application Integration using web Methods.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-share-alt"></i></div>
-                    <h3>Enterprise Web 2.0 Services</h3>
-                    <p>Techrapo Solutions Private Limited helps you quickstart your organization's Web 2.0 initiative. Enterprise Web 2.0 supported by SaaS and PaaS helps companies grow their revenue, provide better customer experiences and achieve greater market share and competitive advantage.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-database"></i></div>
-                    <h3>Oracle</h3>
-                    <p>Our Oracle Enterprise Application Competency Group has capabilities to provide ERP, CRM, and Strategic Enterprise Management (SEM) and DSS Life Cycle Implementation processes for the Oracle suite of Enterprise Applications products.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Methodology Section -->
-    <section id="methodology" class="bg-alt">
-        <div class="container">
-            <div class="section-header">
-                <span class="tagline">Know about our Methodology concept</span>
-                <h2>Our Methodology</h2>
-            </div>
-            <div class="grid-2">
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-project-diagram"></i></div>
-                    <h3>Project Management</h3>
-                    <p>As soon as the start of the project is authorized, the designated Project Manager starts planning for the project. Detailed project plans such as Project Management Plan (PMP), Configuration Management Plan (CMP), Risk Management Plan, Technical Plan, Quality Plan, etc.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-user-shield"></i></div>
-                    <h3>Support</h3>
-                    <p>Customer support is something that we take extremely seriously; we put equal emphasis on the support phase as of development. In fact Techrapo Solutions Private Limited has a well-defined and mature support management process which allows effective capture, reporting, tracking of Issues.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-check-circle"></i></div>
-                    <h3>Quality Management</h3>
-                    <p>Successful quality programs provide efficiencies that reduce cost, improve cycle time and leverage tools in a quantitative manner to assure the highest quality deliverable.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-sliders-h"></i></div>
-                    <h3>Technical Management</h3>
-                    <p>The purpose of Software Project Planning is to establish reasonable plans for performing the software engineering and for managing the software project.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Industries Served Section -->
-    <section id="industries">
-        <div class="container">
-            <div class="section-header">
-                <span class="tagline">Domain Expertise</span>
-                <h2>Industries We Serve</h2>
-            </div>
-            <div class="grid-4">
-                <div class="industry-card">
-                    <i class="fas fa-university"></i>
-                    <h4>Fintech & Banking</h4>
-                </div>
-                <div class="industry-card">
-                    <i class="fas fa-heartbeat"></i>
-                    <h4>Healthcare & Pharma</h4>
-                </div>
-                <div class="industry-card">
-                    <i class="fas fa-shopping-cart"></i>
-                    <h4>E-Commerce & Retail</h4>
-                </div>
-                <div class="industry-card">
-                    <i class="fas fa-truck"></i>
-                    <h4>Logistics & Supply Chain</h4>
-                </div>
-                <div class="industry-card">
-                    <i class="fas fa-industry"></i>
-                    <h4>Manufacturing</h4>
-                </div>
-                <div class="industry-card">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h4>EdTech & Learning</h4>
-                </div>
-                <div class="industry-card">
-                    <i class="fas fa-bolt"></i>
-                    <h4>Energy & Utilities</h4>
-                </div>
-                <div class="industry-card">
-                    <i class="fas fa-plane"></i>
-                    <h4>Travel & Hospitality</h4>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Case Studies Section -->
-    <section id="case-studies" class="bg-alt">
-        <div class="container">
-            <div class="section-header">
-                <span class="tagline">Proven Track Record</span>
-                <h2>Featured Case Studies</h2>
-            </div>
-            <div class="grid-3">
-                <div class="case-card">
-                    <div>
-                        <span class="case-tag">Cloud Migration</span>
-                        <h3>Enterprise Legacy Modernization</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">Migrated multi-tier architecture to SaaS cloud deployment for a global logistics provider, resulting in 40% reduced infrastructure overhead.</p>
-                    </div>
-                </div>
-                <div class="case-card">
-                    <div>
-                        <span class="case-tag">Embedded Systems</span>
-                        <h3>Smart Industrial IoT Integration</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">Developed real-time embedded firmware and visual analytics for a manufacturing firm, optimizing predictive maintenance efficiency.</p>
-                    </div>
-                </div>
-                <div class="case-card">
-                    <div>
-                        <span class="case-tag">SAP Integration</span>
-                        <h3>Cross-Border ERP Optimization</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">Seamlessly connected enterprise middleware with SAP modules across 3 continents with zero operational downtime during rollout.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section>
-        <div class="container">
-            <div class="section-header">
-                <span class="tagline">What Clients Say</span>
-                <h2>Testimonials</h2>
-            </div>
-            <div class="grid-2">
-                <div class="testimonial-card">
-                    <p>"Techrapo Solutions has been instrumental in scaling our core web application. Their process management across multiple time zones made outsourcing seamless."</p>
-                    <div class="client-info">
-                        <div class="client-avatar">VP</div>
-                        <div>
-                            <strong style="color: #fff; font-size: 0.95rem;">VP of Engineering</strong>
-                            <div style="color: var(--text-muted); font-size: 0.85rem;">Global Tech Enterprise</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p>"The software quality assurance and testing team at Techrapo provided rigorous validation that helped us launch on schedule with optimal reliability."</p>
-                    <div class="client-info">
-                        <div class="client-avatar">CTO</div>
-                        <div>
-                            <strong style="color: #fff; font-size: 0.95rem;">Chief Technology Officer</strong>
-                            <div style="color: var(--text-muted); font-size: 0.85rem;">SaaS Solutions Provider</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & Form Section -->
-    <section id="contact" class="bg-alt">
-        <div class="container">
-            <div class="section-header">
-                <span class="tagline">Get In Touch</span>
-                <h2>Contact Us</h2>
-            </div>
-            <div class="contact-grid">
-                <div>
-                    <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 16px;">Ready to Scale Your Technology Operations?</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 24px;">Reach out to our team of experts today. Whether you require outsourcing, enterprise integration, or consulting, we are here to support your mission.</p>
-                    
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <div><strong>Email Us:</strong><br>info@techrapo.com</div>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone-alt"></i>
-                            <div><strong>Call Us:</strong><br>+91 90635 43630</div>
-                        </li>
-                    </ul>
-                </div>
-
-                <form class="contact-form" action="#" method="post" onsubmit="event.preventDefault();">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" class="form-control" placeholder="John Doe" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" class="form-control" placeholder="john@company.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" class="form-control" placeholder="Project Inquiry / Consulting" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" class="form-control" placeholder="Tell us about your project requirements..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Floating Chatbot Widget -->
-    <button class="chatbot-toggler">
-        <i class="fas fa-comments"></i>
+    <!-- Chatbot Floating Toggle Button -->
+    <button class="chatbot-toggler" id="chat-toggle">
+        <i class="fas fa-comment-dots"></i>
         <i class="fas fa-times"></i>
     </button>
+
+    <!-- Chatbot Window -->
     <div class="chatbot">
         <header>
-            <h2><i class="fas fa-robot"></i> Techrapo AI Assistant</h2>
+            <h2><i class="fas fa-robot"></i> Techrapo Assistant</h2>
         </header>
         <ul class="chatbox">
             <li class="chat incoming">
                 <i class="fas fa-robot"></i>
-                <p>Hello! 👋 Welcome to Techrapo Solutions Private Limited. How can I assist you with our services or company details today?</p>
+                <p>Hi there 👋<br>How can I help you today?</p>
             </li>
         </ul>
         <div class="chat-input">
-            <textarea placeholder="Ask me anything about Techrapo..." spellcheck="false" required></textarea>
+            <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
             <span id="send-btn"><i class="fas fa-paper-plane"></i></span>
         </div>
     </div>
 
-    <!-- Corporate Footer Section -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Corporate Links -->
-                <div class="footer-column">
-                    <h4>Corporate</h4>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#solutions">Solutions</a></li>
-                        <li><a href="#technology">Technology</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
-                    </ul>
-                </div>
-
-                <!-- Services Links -->
-                <div class="footer-column">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#services">Web Development</a></li>
-                        <li><a href="#services">Software Development</a></li>
-                        <li><a href="#services">Outsourcing & Consulting</a></li>
-                        <li><a href="#services">System Integration</a></li>
-                        <li><a href="#services">IT Outsourcing</a></li>
-                        <li><a href="#services">Application Services</a></li>
-                    </ul>
-                </div>
-
-                <!-- Reach Us -->
-                <div class="footer-column" style="grid-column: span 2;">
-                    <h4>Reach Us</h4>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <strong style="color: #fff;">Hyderabad Office:</strong><br>
-                                Techrapo Solutions Private Limited<br>
-                                3rd Floor, Capitol Tower, Plot No:1, Khanamet, Beside N Convention, Madhapur, Hyderabad – 500 081, Telangana, India.
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <strong style="color: #fff;">Bangalore Office:</strong><br>
-                                M/s. Techrapo Solutions Private Limited<br>
-                                C/o. Lorven Coworks, No. 76(Old No. 756), 3rd Floor, 10th Main Road, Jayanagar, 4th Block, Bangalore - 560011, Karnataka, India.
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-file-invoice"></i>
-                            <div><strong style="color: #fff;">GSTIN:</strong> 36AAHCT8631L1ZT</div>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone-alt"></i>
-                            <div>+91 90635 43630</div>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <div>info@techrapo.com</div>
-                        </li>
-                    </ul>
-                    <div style="margin-top: 20px;">
-                        <strong style="color: #fff; font-size: 0.9rem;">Follow us On:</strong>
-                        <div class="social-links">
-                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" aria-label="Linkedin"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" aria-label="Google"><i class="fab fa-google"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Copyright -->
-            <div class="footer-bottom">
-                <p>&copy; 2026 Techrapo Solutions Private Limited. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Chatbot Logic Script -->
+    <!-- Responsive Interaction Script -->
     <script>
-        const chatbotToggler = document.querySelector(".chatbot-toggler");
-        const chatInput = document.querySelector(".chat-input textarea");
-        const sendBtn = document.querySelector("#send-btn");
-        const chatbox = document.querySelector(".chatbox");
+        // Mobile Navigation Menu Toggle
+        const menuToggle = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        const menuIcon = menuToggle.querySelector('i');
 
-        let userMessage = "";
-
-        // Interactive Knowledge Base for Techrapo Solutions
-        const generateResponse = (userMsg) => {
-            const msg = userMsg.toLowerCase();
-
-            if (msg.includes("about") || msg.includes("company") || msg.includes("who are you") || msg.includes("history")) {
-                return "Techrapo Solutions Private Limited was established in 2019. We are a pioneer in IT solutions offering Web & Software Development, IT Outsourcing, Consulting, and BPO services.";
-            } else if (msg.includes("service") || msg.includes("what do you do") || msg.includes("offer")) {
-                return "Our core services include:
-• Web Development
-• Software Development
-• Outsourcing & Consulting
-• System Integration
-• IT Outsourcing
-• Application Services";
-            } else if (msg.includes("solution") || msg.includes("sap") || msg.includes("cloud") || msg.includes("embedded") || msg.includes("testing")) {
-                return "Our Solution offerings span across:
-• SAP Integration & Deployment
-• Cloud & SaaS Infrastructure
-• Embedded Systems & Smart Devices
-• SAS Visual Analytics
-• Comprehensive Testing Services";
-            } else if (msg.includes("tech") || msg.includes("stack") || msg.includes("java") || msg.includes("microsoft") || msg.includes("oracle")) {
-                return "We specialize in top global technologies including Microsoft .NET, Java/J2EE, Enterprise Middleware (webMethods), Oracle ERP/CRM, and Web 2.0 Services (SaaS/PaaS).";
-            } else if (msg.includes("contact") || msg.includes("address") || msg.includes("location") || msg.includes("phone") || msg.includes("email") || msg.includes("office")) {
-                return "You can reach us at:
-📧 info@techrapo.com
-📞 +91 90635 43630
-📍 Hyderabad Office: Madhapur, Hyderabad - 500081
-📍 Bangalore Office: Jayanagar 4th Block, Bangalore - 560011";
-            } else if (msg.includes("methodology") || msg.includes("process") || msg.includes("manage")) {
-                return "Our methodology focuses on 4 key pillars: Project Management (PMP, Risk & CMP), Quality Management, Dedicated Technical Support, and Software Project Planning.";
-            } else if (msg.includes("hi") || msg.includes("hello") || msg.includes("hey")) {
-                return "Hello! How can I assist you with Techrapo Solutions today? Feel free to ask about our services, solutions, technology stack, or contact details!";
-            } else {
-                return "Thank you for asking! For specific details or customized consulting inquiries regarding '" + userMsg + "', please email us at info@techrapo.com or call +91 90635 43630. Our team will be happy to assist you!";
-            }
-        };
-
-        const createChatLi = (message, className) => {
-            const chatLi = document.createElement("li");
-            chatLi.classList.add("chat", className);
-            let chatContent = className === "outgoing" 
-                ? `<p></p>` 
-                : `<i class="fas fa-robot"></i><p></p>`;
-            chatLi.innerHTML = chatContent;
-            chatLi.querySelector("p").textContent = message;
-            return chatLi;
-        }
-
-        const handleChat = () => {
-            userMessage = chatInput.value.trim();
-            if (!userMessage) return;
-
-            chatInput.value = "";
-            chatbox.appendChild(createChatLi(userMessage, "outgoing"));
-            chatbox.scrollTo(0, chatbox.scrollHeight);
-
-            setTimeout(() => {
-                const incomingChatLi = createChatLi("Thinking...", "incoming");
-                chatbox.appendChild(incomingChatLi);
-                chatbox.scrollTo(0, chatbox.scrollHeight);
-
-                setTimeout(() => {
-                    const response = generateResponse(userMessage);
-                    incomingChatLi.querySelector("p").textContent = response;
-                    chatbox.scrollTo(0, chatbox.scrollHeight);
-                }, 600);
-
-            }, 300);
-        }
-
-        sendBtn.addEventListener("click", handleChat);
-
-        chatInput.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleChat();
-            }
+        menuToggle.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            menuIcon.classList.toggle('fa-bars');
+            menuIcon.classList.toggle('fa-times');
         });
 
-        chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+        // Close Mobile Menu on Click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+                menuIcon.classList.add('fa-bars');
+                menuIcon.classList.remove('fa-times');
+            });
+        });
+
+        // Chatbot Toggle Action
+        const chatToggle = document.getElementById('chat-toggle');
+        chatToggle.addEventListener('click', () => {
+            document.body.classList.toggle('show-chatbot');
+        });
     </script>
 </body>
 </html>

@@ -1,972 +1,1444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Techrapo Solutions Private Limited — Consulting, Outsourcing &amp; Technical Management</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --blue:#1A579E;
-    --red:#ED1B23;
-    --white:#FFFFFF;
-    --black:#000000;
-    --line: rgba(26,87,158,0.16);
-    --line-soft: rgba(26,87,158,0.09);
-    --wash: rgba(26,87,158,0.035);
-    --wash-2: rgba(26,87,158,0.06);
-    --muted: rgba(26,87,158,0.62);
-    --serif: 'Source Serif 4', serif;
-    --sans: 'Libre Franklin', sans-serif;
-    --mono: 'IBM Plex Mono', monospace;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:var(--sans);
-    color:var(--black);
-    background:var(--white);
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;text-decoration:none;}
-  ul{list-style:none;}
-  svg{display:block;}
-  section{position:relative;}
-  .wrap{max-width:1160px;margin:0 auto;padding:0 40px;}
-  ::selection{background:var(--blue);color:var(--white);}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techrapo Solutions Private Limited</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0f1d;
+            --bg-card: #111827;
+            --bg-card-hover: #1f2937;
+            --primary-glow: #00f2fe;
+            --secondary-glow: #4facfe;
+            --accent-purple: #7928ca;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient-primary: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --gradient-accent: linear-gradient(135deg, #7928ca 0%, #ff0080 100%);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-  /* reveal on scroll */
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);}
-  .reveal.in{opacity:1;transform:translateY(0);}
-  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  /* scroll progress */
-  .progress{position:fixed;top:0;left:0;height:2px;background:var(--red);width:0%;z-index:2000;transition:width .1s linear;}
+        html {
+            scroll-behavior: smooth;
+        }
 
-  /* eyebrow / clause label */
-  .clause{
-    display:flex;align-items:center;gap:12px;
-    font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:var(--muted);
-    margin-bottom:20px;text-transform:uppercase;
-  }
-  .clause::after{content:"";flex:0 0 40px;height:1px;background:var(--line);}
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-  h1,h2,h3,h4{font-family:var(--serif);color:var(--black);font-weight:500;letter-spacing:-.01em;}
-  h2{font-size:clamp(30px,3.6vw,44px);line-height:1.14;font-weight:500;}
-  p{color:var(--black);opacity:.72;font-size:15.5px;}
-  .lede{font-size:18px;line-height:1.6;opacity:.8;}
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-  .btn{
-    display:inline-flex;align-items:center;gap:10px;
-    font-family:var(--sans);font-weight:600;font-size:13.5px;letter-spacing:.01em;
-    padding:15px 26px;cursor:pointer;border-radius:1px;
-    transition:all .22s cubic-bezier(.16,1,.3,1);
-  }
-  .btn-fill{background:var(--red);color:var(--white);border:1px solid var(--red);}
-  .btn-fill:hover{background:#c8151c;border-color:#c8151c;}
-  .btn-line{background:transparent;color:var(--black);border:1px solid var(--black);}
-  .btn-line:hover{background:var(--black);color:var(--white);}
-  .btn-line-white{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.55);}
-  .btn-line-white:hover{border-color:var(--white);background:rgba(255,255,255,0.08);}
-  .btn svg{width:14px;height:14px;transition:transform .22s ease;}
-  .btn:hover svg{transform:translateX(3px);}
+        ul {
+            list-style: none;
+        }
 
-  /* ===== SEAL / MONOGRAM ===== */
-  .seal{position:relative;width:38px;height:38px;flex-shrink:0;object-fit:contain;}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-  /* ===== HEADER ===== */
-  header.site{
-    position:sticky;top:0;z-index:1000;
-    border-bottom:1px solid var(--line);
-  }
-  /* backdrop-filter lives on a pseudo-element, NOT on header itself —
-     backdrop-filter/transform/filter on an ancestor makes it the
-     containing block for position:fixed descendants, which was breaking
-     the full-screen mobile nav panel on phones. */
-  header.site::before{
-    content:"";position:absolute;inset:0;z-index:-1;
-    background:rgba(255,255,255,0.94);backdrop-filter:blur(10px);
-  }
-  .nav-inner{max-width:1240px;margin:0 auto;padding:0 40px;height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
-  .brand{display:flex;align-items:center;gap:12px;flex-shrink:0;}
-  .brand-text{font-family:var(--serif);font-size:18.5px;font-weight:500;color:var(--black);line-height:1.1;}
-  .brand-text small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:3px;}
+        /* Top Bar */
+        .top-bar {
+            background-color: rgba(10, 15, 29, 0.8);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 0;
+            font-size: 0.85rem;
+            backdrop-filter: blur(10px);
+        }
 
-  nav.primary{flex:1;display:flex;justify-content:center;min-width:0;}
-  nav.primary > ul{display:flex;align-items:center;gap:0;flex-wrap:nowrap;}
-  nav.primary > ul > li{position:relative;flex-shrink:0;}
-  nav.primary > ul > li > a, nav.primary > ul > li > button{
-    display:flex;align-items:center;gap:5px;white-space:nowrap;
-    font-family:var(--sans);font-weight:500;font-size:13px;color:var(--black);
-    padding:14px 12px;background:none;border:none;cursor:pointer;position:relative;
-  }
-  nav.primary > ul > li > a::after{
-    content:"";position:absolute;left:12px;right:12px;bottom:11px;height:1px;background:var(--red);
-    transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.16,1,.3,1);
-  }
-  nav.primary > ul > li > a:hover::after{transform:scaleX(1);}
-  nav.primary > ul > li > a:hover, nav.primary > ul > li > button:hover{color:var(--red);}
-  .caret{width:8px;height:8px;transition:transform .2s ease;opacity:.65;flex-shrink:0;}
-  li.has-drop:hover .caret{transform:rotate(180deg);}
-  .dropdown{
-    position:absolute;top:100%;left:0;min-width:270px;background:var(--white);
-    border:1px solid var(--line);box-shadow:0 24px 48px rgba(26,87,158,0.14);
-    padding:6px 0;opacity:0;visibility:hidden;transform:translateY(8px);
-    transition:opacity .2s ease, transform .2s ease, visibility .2s ease;
-    z-index:1100;
-  }
-  li.has-drop:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
-  .dropdown a{
-    display:flex;align-items:baseline;gap:10px;padding:12px 20px;
-    font-family:var(--sans);font-size:13.5px;color:var(--black);
-  }
-  .dropdown a .idx{font-family:var(--mono);font-size:11px;color:var(--red);}
-  .dropdown a:hover{background:var(--wash);}
+        .top-bar .container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
 
-  .nav-cta{display:flex;align-items:center;gap:18px;flex-shrink:0;}
-  .btn-nav{
-    display:inline-flex;align-items:center;gap:9px;
-    font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.01em;
-    padding:11px 20px 11px 14px;border:1px solid var(--black);color:var(--black);
-    background:transparent;position:relative;overflow:hidden;
-  }
-  .btn-nav .status{width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;}
-  .btn-nav span.label{position:relative;z-index:1;}
-  .btn-nav::before{
-    content:"";position:absolute;inset:0;background:var(--black);
-    transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,1,.3,1);z-index:0;
-  }
-  .btn-nav:hover::before{transform:scaleX(1);}
-  .btn-nav:hover{color:var(--white);}
-  .btn-nav:hover .status{background:var(--red);}
+        .top-bar a {
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
 
-  /* burger */
-  .burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:0;flex-shrink:0;}
-  .burger span{width:22px;height:1.5px;background:var(--black);display:block;transition:transform .28s cubic-bezier(.16,1,.3,1), opacity .2s ease;}
-  .burger.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
-  .burger.active span:nth-child(2){opacity:0;}
-  .burger.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+        .top-bar a:hover {
+            color: var(--primary-glow);
+        }
 
-  /* ===== HERO ===== */
-  .hero{padding:72px 0 0;}
-  .hero-top{padding-bottom:56px;border-bottom:1px solid var(--line);max-width:720px;}
-  .hero h1{font-size:clamp(36px,5.4vw,64px);line-height:1.08;font-weight:600;margin:22px 0 26px;}
-  .hero h1 em{font-style:italic;color:var(--red);font-weight:500;}
-  .hero .lede{max-width:480px;margin-bottom:30px;}
-  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+        /* Navigation */
+        header {
+            background-color: rgba(10, 15, 29, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-  .hero-strip{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line);text-align:center;}
-  .hero-strip div{padding:26px 0;border-right:1px solid var(--line);padding-left:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-  .hero-strip div:last-child{border-right:none;}
-  .hero-strip strong{display:block;font-family:var(--serif);font-size:28px;font-weight:500;color:var(--blue);}
-  .hero-strip span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
 
-  /* ===== ABOUT ===== */
-  .about{padding:130px 0;}
-  .about .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;}
-  .about-quote{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.4vw,30px);line-height:1.42;color:var(--blue);font-weight:500;}
-  .about-quote .num{display:block;font-family:var(--mono);font-style:normal;font-size:13px;color:var(--red);margin-bottom:18px;letter-spacing:.05em;}
-  .about-body p{margin-bottom:18px;max-width:560px;font-size:16px;}
-  .about-table{margin-top:36px;border-top:1px solid var(--line);}
-  .about-table div{display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--line);}
-  .about-table div span:first-child{font-family:var(--mono);font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
-  .about-table div span:last-child{font-family:var(--serif);font-size:16px;font-weight:500;}
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-  /* ===== SERVICES — board grid ===== */
-  .services{padding:130px 0;background:var(--wash);}
-  .service-board{
-    margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);
-    border-top:1px solid var(--line);border-left:1px solid var(--line);
-  }
-  .service-card{
-    background:var(--white);border-right:1px solid var(--line);border-bottom:1px solid var(--line);
-    padding:40px 34px;position:relative;overflow:hidden;
-    transition:background .28s ease, transform .28s cubic-bezier(.16,1,.3,1);
-  }
-  .service-card::before{
-    content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);
-    transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.16,1,.3,1);
-  }
-  .service-card:hover::before{transform:scaleX(1);}
-  .service-card:hover{background:var(--wash-2);transform:translateY(-4px);}
-  .service-card .idx{font-family:var(--mono);font-size:12px;color:var(--red);display:block;margin-bottom:26px;}
-  .service-card h3{font-size:20px;font-weight:600;margin-bottom:12px;}
-  .service-card p{font-size:14.5px;}
+        .logo-icon {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-  /* ===== SOLUTIONS — board grid ===== */
-  .solutions{padding:130px 0;}
-  .solutions .wrap > .clause, .solutions .wrap > h2{max-width:640px;}
-  .solution-board{
-    margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-    background:var(--line);border:1px solid var(--line);
-  }
-  .solution-card{
-    background:var(--white);padding:38px 32px;
-    transition:background .28s ease, transform .28s cubic-bezier(.16,1,.3,1);
-  }
-  .solution-card:hover{background:var(--wash-2);transform:translateY(-4px);}
-  .solution-card .dot{width:9px;height:9px;border-radius:50%;background:var(--red);margin-bottom:22px;}
-  .solution-card h4{font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:12px;}
-  .solution-card p{font-size:14.5px;}
-  .solution-card.wide{grid-column:span 1;}
+        .logo span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-  /* ===== TECHNOLOGY ===== */
-  .technology{padding:130px 0;background:var(--blue);color:var(--white);}
-  .technology .clause{color:rgba(255,255,255,0.65);}
-  .technology .clause::after{background:rgba(255,255,255,0.25);}
-  .technology h2{color:var(--white);max-width:600px;}
-  .tech-grid{margin-top:56px;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,0.18);border-left:1px solid rgba(255,255,255,0.18);}
-  .tech-card{border-right:1px solid rgba(255,255,255,0.18);border-bottom:1px solid rgba(255,255,255,0.18);padding:30px 22px;transition:background .25s ease;}
-  .tech-card:hover{background:rgba(255,255,255,0.05);}
-  .tech-card span{font-family:var(--mono);font-size:11px;color:var(--red);}
-  .tech-card h4{color:var(--white);font-size:16px;margin:14px 0 10px;font-weight:500;}
-  .tech-card p{color:var(--white);opacity:.68;font-size:13px;}
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
 
-  /* ===== METHODOLOGY — clauses ===== */
-  .methodology{padding:130px 0;}
-  .methodology .wrap > .clause, .methodology .wrap > h2{max-width:640px;}
-  .clause-list{margin-top:56px;}
-  .clause-item{display:grid;grid-template-columns:100px 1fr;gap:40px;padding:38px 0;border-top:1px solid var(--line);}
-  .clause-item:last-child{border-bottom:1px solid var(--line);}
-  .roman{font-family:var(--serif);font-style:italic;font-size:34px;color:var(--red);font-weight:500;}
-  .clause-item h3{font-size:19px;margin-bottom:10px;font-weight:500;}
-  .clause-item p{font-size:15px;max-width:600px;}
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+            position: relative;
+        }
 
-  /* ===== CAREER ===== */
-  .career{background:var(--blue);color:var(--white);}
-  .career .wrap{padding:70px 40px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;border-top:3px solid var(--red);}
-  .career h2{color:var(--white);margin-bottom:10px;font-size:clamp(24px,2.8vw,32px);}
-  .career p{color:var(--white);opacity:.72;max-width:420px;}
+        .nav-links a:hover {
+            color: #fff;
+        }
 
-  /* ===== NEWSLETTER ===== */
-  .newsletter{padding:60px 0;border-bottom:1px solid var(--line);}
-  .newsletter .wrap{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
-  .newsletter h3{font-size:20px;font-weight:500;margin-bottom:6px;}
-  .newsletter p{font-size:14px;}
-  .newsletter-form{display:flex;align-items:flex-end;gap:0;border-bottom:1.5px solid var(--blue);min-width:340px;}
-  .newsletter-form input{
-    flex:1;border:none;background:transparent;padding:10px 4px;font-family:var(--sans);font-size:15px;color:var(--blue);
-  }
-  .newsletter-form input:focus{outline:none;}
-  .newsletter-form input::placeholder{color:var(--muted);}
-  .newsletter-form button{background:none;border:none;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--red);cursor:pointer;padding:10px 6px;display:flex;align-items:center;gap:6px;}
-  .newsletter-form button svg{width:13px;height:13px;transition:transform .22s ease;}
-  .newsletter-form button:hover svg{transform:translateX(3px);}
-  .newsletter-msg{margin-top:12px;font-size:13px;font-family:var(--mono);color:var(--red);display:none;}
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -6px;
+            left: 0;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
 
-  /* ===== CONTACT ===== */
-  .contact{padding:130px 0;}
-  .contact .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;}
-  .contact-info h2{margin-bottom:16px;}
-  .contact-info .lede{margin-bottom:40px;}
-  .info-block{padding:20px 0;border-top:1px solid var(--line);}
-  .info-block:last-child{border-bottom:1px solid var(--line);}
-  .info-block strong{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
-  .info-block span{font-family:var(--sans);font-size:14.5px;font-weight:500;opacity:.9;}
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-  form.contact-form{display:flex;flex-direction:column;gap:30px;}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
-  .field{position:relative;}
-  .field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;}
-  .field input,.field textarea{
-    width:100%;border:none;border-bottom:1.5px solid var(--line);background:transparent;
-    font-family:var(--sans);font-size:15.5px;color:var(--blue);padding:8px 2px 12px;
-    transition:border-color .2s ease;
-  }
-  .field input:focus,.field textarea:focus{outline:none;border-color:var(--blue);}
-  .field textarea{resize:vertical;min-height:90px;}
-  .field select{
-    width:100%;border:none;border-bottom:1.5px solid var(--line);background:transparent;
-    font-family:var(--sans);font-size:15.5px;color:var(--black);padding:8px 2px 12px;
-    transition:border-color .2s ease;appearance:none;-webkit-appearance:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%231A579E' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:right 2px center;
-  }
-  .field select:focus{outline:none;border-color:var(--blue);}
-  .phone-field{display:flex;align-items:flex-end;gap:10px;border-bottom:1.5px solid var(--line);}
-  .phone-field:focus-within{border-color:var(--blue);}
-  .phone-code{font-family:var(--mono);font-size:15px;color:var(--muted);padding:8px 0 12px;flex-shrink:0;}
-  .phone-field input{border-bottom:none;padding-left:0;}
-  .contact-form .btn{align-self:flex-start;margin-top:6px;}
-  .form-msg{font-family:var(--mono);font-size:13px;color:var(--red);display:none;}
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 120px 0 160px;
+            background: radial-gradient(circle at 50% 20%, rgba(0, 242, 254, 0.12) 0%, rgba(10, 15, 29, 0) 70%);
+            text-align: center;
+        }
 
-  /* ===== FOOTER ===== */
-  footer{background:var(--blue);color:var(--white);padding-top:80px;}
-  .footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:50px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,0.16);}
-  .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
-  .footer-brand span{font-family:var(--serif);font-size:19px;font-weight:500;}
-  .footer-col p{color:var(--white);opacity:.68;font-size:14px;max-width:260px;}
-  .footer-col h4{color:rgba(255,255,255,0.55);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;font-weight:400;}
-  .footer-col ul li{margin-bottom:12px;}
-  .footer-col ul li a{font-size:14px;color:var(--white);opacity:.78;}
-  .footer-col ul li a:hover{opacity:1;color:var(--red);}
-  .social{display:flex;gap:10px;margin-top:22px;}
-  .social a{width:32px;height:32px;border:1px solid rgba(255,255,255,0.28);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;}
-  .social a:hover{border-color:var(--red);background:var(--red);}
-  .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:24px 0;font-family:var(--mono);font-size:12px;opacity:.6;}
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
 
-  /* ===== RESPONSIVE ===== */
-  @media (max-width:1100px){
-    .wrap{padding:0 32px;}
-    .nav-inner{padding:0 32px;}
-  }
+        .hero p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-weight: 400;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-  /* ===== NAV: switch to mobile menu earlier so items never overflow/squeeze on tablets ===== */
-  @media (max-width:1024px){
-    .nav-inner{gap:12px;}
-    nav.primary{
-      position:fixed;top:0;left:0;right:0;bottom:0;background:var(--white);
-      flex-direction:column;justify-content:flex-start;
-      padding:100px 26px 40px;transform:translateX(100%);
-      transition:transform .32s cubic-bezier(.16,1,.3,1);overflow-y:auto;z-index:900;
-    }
-    nav.primary.open{transform:translateX(0);}
-    nav.primary > ul{flex-direction:column;align-items:stretch;width:100%;gap:0;flex-wrap:wrap;}
-    nav.primary > ul > li{width:100%;}
-    nav.primary > ul > li > a, nav.primary > ul > li > button{
-      width:100%;padding:17px 4px;font-size:16.5px;justify-content:space-between;
-      border-bottom:1px solid var(--line);
-    }
-    nav.primary > ul > li > a::after{display:none;}
-    .dropdown{
-      position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:none;
-      display:none;padding:4px 0 4px 14px;min-width:0;width:100%;
-    }
-    li.has-drop.open .dropdown{display:block;}
-    li.has-drop.open .caret{transform:rotate(180deg);}
-    .dropdown a{padding:13px 6px;border-bottom:none;}
-    .nav-cta{display:none;}
-    .burger{display:flex;}
-    body.nav-open{overflow:hidden;}
-  }
+        /* Feature Cards Overlapping Hero */
+        .hero-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: -80px;
+            position: relative;
+            z-index: 10;
+        }
 
-  @media (max-width:980px){
-    section{padding-top:96px !important;padding-bottom:96px !important;}
-    .hero{padding-top:64px !important;padding-bottom:0 !important;}
-    .hero-top{max-width:100%;gap:40px;}
-    .hero-strip{grid-template-columns:repeat(2,1fr);}
-    .hero-strip div:nth-child(2n){border-right:none;}
-    .about .wrap{grid-template-columns:1fr;gap:44px;}
-    .service-board{grid-template-columns:repeat(2,1fr);}
-    .solution-board{grid-template-columns:repeat(2,1fr);}
-    .tech-grid{grid-template-columns:repeat(2,1fr);}
-    .clause-item{grid-template-columns:70px 1fr;gap:26px;}
-    .contact .wrap{grid-template-columns:1fr;gap:50px;}
-    .footer-top{grid-template-columns:1fr 1fr;gap:36px;}
-  }
-  @media (max-width:760px){
-    .nav-inner{padding:0 22px;height:70px;}
-    .wrap{padding:0 22px;}
-    section{padding-top:72px !important;padding-bottom:72px !important;}
-    .hero{padding-top:48px !important;}
-    .hero h1{font-size:clamp(30px,9vw,44px);}
-    .hero-ctas{flex-direction:column;align-items:stretch;}
-    .hero-ctas .btn{justify-content:center;}
-    nav.primary{padding-top:86px;}
-    .hero-strip{grid-template-columns:1fr 1fr;}
-    .hero-strip div{padding:20px 0;}
-    .about-quote{font-size:22px;}
-    .service-board{grid-template-columns:1fr;}
-    .solution-board{grid-template-columns:1fr;}
-    .tech-grid{grid-template-columns:1fr 1fr;}
-    .clause-item{grid-template-columns:1fr;gap:12px;padding:28px 0;}
-    .roman{font-size:26px;}
-    .form-row{grid-template-columns:1fr;gap:22px;}
-    .newsletter .wrap{flex-direction:column;align-items:stretch;}
-    .newsletter-form{min-width:0;width:100%;}
-    .footer-top{grid-template-columns:1fr;gap:36px;padding-bottom:40px;}
-    .footer-bottom{flex-direction:column;gap:8px;}
-    .career .wrap{flex-direction:column;align-items:flex-start;padding:44px 22px;gap:22px;}
-    .career .wrap .btn{width:100%;justify-content:center;}
-  }
-  @media (max-width:480px){
-    .tech-grid{grid-template-columns:1fr;}
-    .hero-strip{grid-template-columns:1fr;}
-    .hero-strip div{border-right:none !important;border-bottom:1px solid var(--line);}
-    .hero-strip div:last-child{border-bottom:none;}
-    h2{font-size:26px;}
-    .brand-text{font-size:16px;}
-    .brand-text small{display:none;}
-  }
-</style>
+        .hero-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 32px;
+            border-radius: 16px;
+            transition: var(--transition);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .hero-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 242, 254, 0.3);
+            background: var(--bg-card-hover);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-card:hover::before {
+            opacity: 1;
+        }
+
+        .hero-card .icon {
+            font-size: 1.8rem;
+            color: var(--primary-glow);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .hero-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .hero-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header .tagline {
+            text-transform: uppercase;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .section-header h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Grid Layouts for Cards */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: rgba(79, 172, 254, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: var(--bg-card-hover);
+        }
+
+        .card .card-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            color: var(--primary-glow);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 24px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .bg-alt {
+            background-color: rgba(17, 24, 39, 0.5);
+        }
+
+        /* Stats Section */
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-glow);
+        }
+
+        .stat-card .number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Industries Section */
+        .industry-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: var(--transition);
+        }
+
+        .industry-card:hover {
+            border-color: var(--primary-glow);
+            background: var(--bg-card-hover);
+            transform: translateX(4px);
+        }
+
+        .industry-card i {
+            font-size: 1.5rem;
+            color: var(--primary-glow);
+        }
+
+        .industry-card h4 {
+            color: #fff;
+            font-size: 1.05rem;
+        }
+
+        /* Case Studies Section */
+        .case-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .case-tag {
+            display: inline-block;
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--primary-glow);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            width: fit-content;
+        }
+
+        /* Testimonials Section */
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+        }
+
+        .testimonial-card p {
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .client-avatar {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-dark);
+            font-weight: 700;
+        }
+
+        /* Contact Section Form */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 36px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-glow);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 8px;
+            color: var(--bg-dark);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Chatbot Styling */
+        .chatbot-toggler {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            outline: none;
+            border: none;
+            height: 60px;
+            width: 60px;
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 25px rgba(0, 242, 254, 0.4);
+            z-index: 9999;
+        }
+
+        .chatbot-toggler i {
+            color: var(--bg-dark);
+            font-size: 1.5rem;
+            position: absolute;
+        }
+
+        .chatbot-toggler i:last-child,
+        body.show-chatbot .chatbot-toggler i:first-child {
+            opacity: 0;
+        }
+
+        body.show-chatbot .chatbot-toggler i:last-child {
+            opacity: 1;
+        }
+
+        .chatbot {
+            position: fixed;
+            right: 30px;
+            bottom: 100px;
+            width: 380px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.5);
+            transform-origin: bottom right;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            z-index: 9999;
+        }
+
+        body.show-chatbot .chatbot {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+
+        .chatbot header {
+            padding: 16px 20px;
+            position: relative;
+            text-align: center;
+            color: #fff;
+            background: rgba(17, 24, 39, 0.9);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chatbot header h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .chatbot header h2 i {
+            color: var(--primary-glow);
+        }
+
+        .chatbot .chatbox {
+            overflow-y: auto;
+            height: 340px;
+            padding: 16px;
+        }
+
+        .chatbox .chat {
+            display: flex;
+            list-style: none;
+            margin-bottom: 12px;
+        }
+
+        .chatbox .outgoing {
+            margin: 10px 0;
+            justify-content: flex-end;
+        }
+
+        .chatbox .incoming {
+            margin: 10px 0;
+            justify-content: flex-start;
+            gap: 10px;
+        }
+
+        .chatbox .incoming i {
+            width: 32px;
+            height: 32px;
+            color: var(--bg-dark);
+            background: var(--gradient-primary);
+            text-align: center;
+            line-height: 32px;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            align-self: flex-end;
+            flex-shrink: 0;
+        }
+
+        .chatbox .chat p {
+            white-space: pre-wrap;
+            padding: 10px 14px;
+            border-radius: 12px;
+            max-width: 80%;
+            color: #fff;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .chatbox .incoming p {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-bottom-left-radius: 2px;
+        }
+
+        .chatbox .outgoing p {
+            background: var(--gradient-primary);
+            color: var(--bg-dark);
+            font-weight: 600;
+            border-bottom-right-radius: 2px;
+        }
+
+        .chatbot .chat-input {
+            display: flex;
+            gap: 5px;
+            position: relative;
+            width: 100%;
+            background: var(--bg-dark);
+            padding: 10px 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chat-input textarea {
+            height: 40px;
+            width: 100%;
+            border: none;
+            outline: none;
+            resize: none;
+            max-height: 100px;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            background: transparent;
+            color: #fff;
+            font-family: inherit;
+        }
+
+        .chat-input span {
+            align-self: flex-end;
+            color: var(--primary-glow);
+            cursor: pointer;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #060a12;
+            border-top: 1px solid var(--border-color);
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: var(--text-muted);
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-glow);
+        }
+
+        .contact-info li {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .contact-info i {
+            color: var(--primary-glow);
+            margin-top: 4px;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--gradient-primary);
+            color: var(--bg-dark);
+            border-color: transparent;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                height: auto;
+                padding: 20px 0;
+            }
+
+            .nav-links {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .about-content, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-cards {
+                margin-top: 20px;
+            }
+
+            .chatbot {
+                right: 15px;
+                bottom: 90px;
+                width: calc(100% - 30px);
+            }
+        }
+    </style>
 </head>
 <body>
 
-
-<div class="progress" id="progressBar"></div>
-
-<!-- ===== HEADER ===== -->
-<header class="site">
-  <div class="nav-inner">
-    <a href="#home" class="brand">
-      <img src="https://raw.githubusercontent.com/Techrapo/product/main/Logo_Transparent.png" alt="Techrapo Solutions Private Limited" class="seal">
-      <span class="brand-text">Techrapo Solutions</span>
-    </a>
-
-    <nav class="primary" id="primaryNav">
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="testing contact 2.html">Career</a></li>
-        <li class="has-drop">
-          <button type="button">Service
-            <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#1A579E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="dropdown">
-            <a href="#services"><span class="idx">01</span>Web Development</a>
-            <a href="#services"><span class="idx">02</span>Software Development</a>
-            <a href="#services"><span class="idx">03</span>Outsourcing &amp; Consulting</a>
-            <a href="#services"><span class="idx">04</span>System Integration</a>
-            <a href="#services"><span class="idx">05</span>IT Outsourcing</a>
-            <a href="#services"><span class="idx">06</span>Application Services</a>
-          </div>
-        </li>
-        <li><a href="#solutions">Solution</a></li>
-        <li><a href="#technology">Technology</a></li>
-        <li><a href="#methodology">Methodology</a></li>
-        <li class="has-drop">
-          <button type="button">Other
-            <svg class="caret" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="#1A579E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="dropdown">
-            <a href="#about"><span class="idx">—</span>About</a>
-            <a href="#contact"><span class="idx">—</span>Contact Us</a>
-            <a href="#career"><span class="idx">—</span>Find a Job</a>
-          </div>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="nav-cta">
-      <a href="#contact" class="btn-nav"><span class="status"></span><span class="label">Request a Consultation</span></a>
-    </div>
-    <button class="burger" id="burgerBtn" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  </div>
-</header>
-
-<!-- ===== HERO ===== -->
-<section class="hero" id="home">
-  <div class="wrap">
-    <div class="hero-top">
-      <div>
-        <div class="clause">Consulting · IT Outsourcing · Technical Management</div>
-        <h1>Enterprise systems,<br>engineered with <em>rigour.</em></h1>
-        <p class="lede">Techrapo Solutions Private Limited partners with organizations across the full product lifecycle — from research and development through quality assurance, integration and long-term support.</p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn btn-fill">Request a Consultation <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a href="#services" class="btn btn-line">View Services</a>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <a href="mailto:info@techrapo.com"><i class="fas fa-envelope"></i> info@techrapo.com</a>
         </div>
-      </div>
     </div>
 
-    <div class="hero-strip">
-      <div><strong>06</strong><span>Core Services</span></div>
-      <div><strong>05</strong><span>Enterprise Solutions</span></div>
-      <div><strong>05</strong><span>Technology Practices</span></div>
-      <div><strong>02</strong><span>India Offices</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== ABOUT ===== -->
-<section class="about" id="about">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="about-quote">
-        <span class="num">01 — About the Firm</span>
-        “What began as a small outsourcing practice has risen to become a pioneer in IT solutions.”
-      </div>
-    </div>
-    <div class="about-body reveal">
-      <p>Techrapo Solutions Private Limited was established in 2019, initially focused on outsourcing and consulting services with the intention of producing enormous business volumes by binding the power of web and technology.</p>
-      <p>The firm now offers a wide spectrum of services including web development, software development, BPO, outsourcing and consulting — built on a foundation of process discipline and measurable delivery.</p>
-      <div class="about-table">
-        <div><span>Founded</span><span>2019</span></div>
-        <div><span>Headquarters</span><span>Madhapur, Hyderabad</span></div>
-        <div><span>Secondary Office</span><span>Jayanagar, Bangalore</span></div>
-        <div><span>Registration</span><span>GSTIN 36AAHCT8631L1ZT</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== SERVICES ===== -->
-<section class="services" id="services">
-  <div class="wrap">
-    <div class="clause reveal">02 — Schedule of Services</div>
-    <h2 class="reveal">Six practices, one accountable partner.</h2>
-
-    <div class="service-board reveal">
-      <div class="service-card">
-        <span class="idx">01</span>
-        <h3>Web Development</h3>
-        <p>Building and supporting robust, high-capacity web applications and information systems for organizations with online business models.</p>
-      </div>
-      <div class="service-card">
-        <span class="idx">02</span>
-        <h3>Software Development</h3>
-        <p>Undertaking application development projects across the full lifecycle of software development, or any part of it.</p>
-      </div>
-      <div class="service-card">
-        <span class="idx">03</span>
-        <h3>Outsourcing &amp; Consulting</h3>
-        <p>Helping organizations navigate an increasingly complex technology landscape, brought on by the continuous progression of technology itself.</p>
-      </div>
-      <div class="service-card">
-        <span class="idx">04</span>
-        <h3>System Integration</h3>
-        <p>Resolving the confusion, inefficiency and decreased productivity that arise when one enterprise runs multiple, disconnected IT systems.</p>
-      </div>
-      <div class="service-card">
-        <span class="idx">05</span>
-        <h3>IT Outsourcing</h3>
-        <p>Ensuring quality delivery of solutions even 1,000 miles away, across multiple time zones, through strict adherence to process.</p>
-      </div>
-      <div class="service-card">
-        <span class="idx">06</span>
-        <h3>Application Services</h3>
-        <p>Serving the business needs of an extensive range of industry verticals with focused, enterprise-grade solutions.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== SOLUTIONS ===== -->
-<section class="solutions" id="solutions">
-  <div class="wrap">
-    <div class="clause reveal">03 — Enterprise Solutions</div>
-    <h2 class="reveal">Platforms we build and integrate on.</h2>
-
-    <div class="solution-board reveal">
-      <div class="solution-card">
-        <span class="dot"></span>
-        <h4>SAP</h4>
-        <p>Over 100,000 companies worldwide run SAP solutions. Getting the most from an SAP-based system requires seamless integration and smooth deployment.</p>
-      </div>
-      <div class="solution-card">
-        <span class="dot"></span>
-        <h4>Cloud / SaaS</h4>
-        <p>We've built, hosted and deployed cloud and SOA-based infrastructures for clients handling an ever-increasing number of interactions and transactions.</p>
-      </div>
-      <div class="solution-card">
-        <span class="dot"></span>
-        <h4>Embedded Systems</h4>
-        <p>High-tech products continue to have significant impact on comfort, convenience and productivity through smart, efficient devices.</p>
-      </div>
-      <div class="solution-card">
-        <span class="dot"></span>
-        <h4>SAS</h4>
-        <p>Combining intelligent search, information access and data integration with intuitive visual analytics to predict, prevent and respond to threats.</p>
-      </div>
-      <div class="solution-card">
-        <span class="dot"></span>
-        <h4>Testing</h4>
-        <p>A dedicated Testing Services unit with a comprehensive portfolio that assures measurable business outcomes through improved quality processes.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== TECHNOLOGY ===== -->
-<section class="technology" id="technology">
-  <div class="wrap">
-    <div class="clause reveal">04 — Technology Practices</div>
-    <h2 class="reveal">Global technology, applied locally.</h2>
-    <div class="tech-grid reveal">
-      <div class="tech-card"><span>MS</span><h4>Microsoft</h4><p>A large pool of engineers focused on .NET, backed by our Microsoft Competency Center Lab.</p></div>
-      <div class="tech-card"><span>JV</span><h4>Java / J2EE</h4><p>Architecture, assessment, application development, deployment and maintenance.</p></div>
-      <div class="tech-card"><span>MW</span><h4>Middleware</h4><p>Configuration, design and implementation of Enterprise Application Integration using webMethods.</p></div>
-      <div class="tech-card"><span>W2</span><h4>Web 2.0</h4><p>Quickstarting your Web 2.0 initiative, supported by SaaS and PaaS.</p></div>
-      <div class="tech-card"><span>OR</span><h4>Oracle</h4><p>ERP, CRM, SEM and DSS lifecycle implementation for the Oracle application suite.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== METHODOLOGY ===== -->
-<section class="methodology" id="methodology">
-  <div class="wrap">
-    <div class="clause reveal">05 — Methodology</div>
-    <h2 class="reveal">How engagements are governed.</h2>
-
-    <div class="clause-list reveal">
-      <div class="clause-item">
-        <span class="roman">I</span>
-        <div>
-          <h3>Project Management</h3>
-          <p>As soon as a project is authorized, the designated Project Manager begins detailed planning — a Project Management Plan, Configuration Management Plan, Risk Management Plan, Technical Plan and Quality Plan.</p>
+    <!-- Header / Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-microchip logo-icon"></i> Techrapo<span>Solutions</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#industries">Industries</a></li>
+                    <li><a href="#case-studies">Cases</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-      </div>
-      <div class="clause-item">
-        <span class="roman">II</span>
-        <div>
-          <h3>Support</h3>
-          <p>Customer support is treated with the same seriousness as development, backed by a mature process for the capture, reporting and tracking of issues.</p>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Techrapo Solutions Private Limited</h1>
+            <p class="subtitle">Consulting Services | IT Outsourcing | Technical Management</p>
         </div>
-      </div>
-      <div class="clause-item">
-        <span class="roman">III</span>
-        <div>
-          <h3>Quality Management</h3>
-          <p>Quality programs deliver efficiencies that reduce cost, improve cycle time and apply tools quantitatively to assure the highest quality deliverable.</p>
+    </section>
+
+    <!-- Top Feature Cards Overlapping Hero -->
+    <div class="container">
+        <div class="hero-cards">
+            <div class="hero-card">
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Consulting Services</h3>
+                <p>We assist clients throughout the product development lifecycle, from product research and new product development to quality assurance...</p>
+            </div>
+            <div class="hero-card">
+                <div class="icon"><i class="fas fa-globe"></i></div>
+                <h3>IT Outsourcing</h3>
+                <p>How do we ensure quality delivery of solution, especially when you take the project 1000 miles away across multiple time zones...</p>
+            </div>
+            <div class="hero-card">
+                <div class="icon"><i class="fas fa-tasks"></i></div>
+                <h3>Technical Management</h3>
+                <p>The purpose of Software Project Planning is to establish reasonable plans for performing the software engineering and for managing...</p>
+            </div>
         </div>
-      </div>
-      <div class="clause-item">
-        <span class="roman">IV</span>
-        <div>
-          <h3>Technical Management</h3>
-          <p>Software Project Planning establishes reasonable plans for performing the engineering work and managing the project end to end.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== CAREER ===== -->
-<section class="career" id="career">
-  <div class="wrap">
-    <div>
-      <h2>Build the systems with us.</h2>
-      <p>We're always looking for engineers, consultants and project managers who want to work across the full product lifecycle.</p>
-    </div>
-    <a href="#contact" class="btn btn-line-white">Find a Job</a>
-  </div>
-</section>
-
-<!-- ===== NEWSLETTER ===== -->
-<section class="newsletter">
-  <div class="wrap">
-    <div>
-      <h3>Stay informed</h3>
-      <p>Occasional notes on our services, solutions and open roles.</p>
-    </div>
-    <div>
-      <form class="newsletter-form" id="newsletterForm">
-        <input type="email" placeholder="Enter your email address" required>
-        <button type="submit">Subscribe <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      </form>
-      <div class="newsletter-msg" id="newsletterMsg">— Thank you, you're subscribed.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== CONTACT ===== -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="contact-info reveal">
-      <div class="clause">06 — Contact</div>
-      <h2>Let's start your business.</h2>
-      <p class="lede">Reach out and our team will get back to you shortly.</p>
-
-      <div class="info-block">
-        <strong>Hyderabad Office</strong>
-        <span>3rd Floor, Capitol Tower, Plot No: 1, Khanamet, Beside N Convention, Madhapur, Hyderabad – 500 081, Telangana, India</span>
-      </div>
-      <div class="info-block">
-        <strong>Bangalore Office</strong>
-        <span>C/o. Lorven Coworks, No. 76 (Old No. 756), 3rd Floor, 10th Main Road, Jayanagar, 4th Block, Bangalore – 560011, Karnataka, India</span>
-      </div>
-      <div class="info-block">
-        <strong>Phone &amp; Email</strong>
-        <span>+91 90635 43630 · info@techrapo.com</span>
-      </div>
     </div>
 
-    <form class="contact-form reveal" id="contactForm">
-      <div class="form-row">
-        <div class="field">
-          <label for="fname">Full Name</label>
-          <input id="fname" type="text" placeholder="Your name" required>
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="tagline">Let’s Start your Business</span>
+                <h2>Welcome to Techrapo Solutions Private Limited</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Techrapo Solutions Private Limited established in the year 2019, the company initially focused on outsourcing and consulting services with the intention to produce enormous business volumes by binding the power of web and technology.</p>
+                    <p>Techrapo Solutions Private Limited which began as a small company has now risen to become a pioneer in the area of IT solutions, offering wide spectrum of services including web development, software development, BPO, Outsourcing and Consulting.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="About Techrapo Solutions">
+                </div>
+            </div>
         </div>
-        <div class="field">
-          <label for="femail">Email</label>
-          <input id="femail" type="email" placeholder="you@company.com" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="field">
-          <label for="fcountry">Country</label>
-          <select id="fcountry" required>
-            <option value="" disabled selected>Select your country</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="fphone">Phone Number</label>
-          <div class="phone-field">
-            <span class="phone-code" id="phoneCode">+91</span>
-            <input id="fphone" type="tel" placeholder="9000000000" inputmode="numeric" required>
-          </div>
-        </div>
-      </div>
-      <div class="field">
-        <label for="fsubject">Subject</label>
-        <input id="fsubject" type="text" placeholder="How can we help?" required>
-      </div>
-      <div class="field">
-        <label for="fmessage">Message</label>
-        <textarea id="fmessage" placeholder="Tell us about your project..." required></textarea>
-      </div>
-      <button type="submit" class="btn btn-fill">Send Message <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <div class="form-msg" id="formMsg">— Thank you, we'll be in touch shortly.</div>
-    </form>
-  </div>
-</section>
+    </section>
 
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="wrap">
-    <div class="footer-top">
-      <div class="footer-col">
-        <div class="footer-brand">
-          <svg class="seal" viewBox="0 0 44 44" fill="none">
-            <circle cx="22" cy="22" r="20.5" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1.2"/>
-            <circle cx="22" cy="22" r="16.5" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1"/>
-            <path d="M13 15h9a4.5 4.5 0 0 1 0 9h-2.5" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M19.5 24V31" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
-            <circle cx="29.5" cy="15.5" r="2.1" fill="#ED1B23"/>
-          </svg>
-          <span>Techrapo Solutions</span>
+    <!-- Key Metrics / Stats Section -->
+    <section class="bg-alt">
+        <div class="container">
+            <div class="grid-4">
+                <div class="stat-card">
+                    <div class="number">7+</div>
+                    <div class="label">Years of Excellence</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">150+</div>
+                    <div class="label">Projects Delivered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">50+</div>
+                    <div class="label">Global Clients</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">99%</div>
+                    <div class="label">Client Retention</div>
+                </div>
+            </div>
         </div>
-        <p>Consulting Services, IT Outsourcing and Technical Management — established 2019, Hyderabad, India.</p>
-        <div class="social">
-          <a href="#" aria-label="Facebook">FB</a>
-          <a href="#" aria-label="LinkedIn">IN</a>
-          <a href="#" aria-label="Twitter">TW</a>
-          <a href="#" aria-label="Google">G</a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="tagline">Services that we offer</span>
+                <h2>Our Services</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>Techrapo Solutions Private Limited, we specialize in building and supporting robust, high-capacity web applications and information systems for organizations with online business models.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Software Development</h3>
+                    <p>Techrapo Solutions Private Limited undertakes application development projects that may include the full lifecycle of software development or just a part of it.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Outsourcing & Consulting</h3>
+                    <p>Continuous progression of technology has assisted our organization in attaining new heights, however this speedy development also has left behind a complex landscape.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>System Integration</h3>
+                    <p>One enterprise with multiple IT system can result in confusion, inefficiency and decreased productivity. Techrapo Solutions Private Limited expertise.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-headset"></i></div>
+                    <h3>IT Outsourcing</h3>
+                    <p>How do we ensure quality delivery of solution, especially when you take the project 1000 miles away across multiple time zones? This requires special adherence to process.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>Application Services</h3>
+                    <p>Enterprise Solutions Practice of Techrapo Solutions Private Limited caters to the business needs of an extensive range of industry verticals focusing on providing specific solutions.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="footer-col">
-        <h4>Corporate</h4>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#solutions">Solutions</a></li>
-          <li><a href="#contact">Contact Us</a></li>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="bg-alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="tagline">Our Solutions is your success</span>
+                <h2>Our Solutions</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-building"></i></div>
+                    <h3>SAP</h3>
+                    <p>Over 100,000 companies worldwide run SAP solutions and take advantage of SAP services. In a diversified IT landscape, getting the most from an SAP-based system requires seamless integration and a smooth deployment into your existing business environment.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Cloud/SaaS</h3>
+                    <p>We’ve built, hosted, and deployed cloud and SOA based infrastructures for a wide range of clients in many industries. Today, companies of all sizes in all industries are handling an ever-increasing number of interactions and transactions.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>Embedded Systems</h3>
+                    <p>High-tech products continue to have significant impact on the socio-economic scenario, in terms of comfort, convenience and productivity improvements. Personal comfort and productivity through smart and efficient devices.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-chart-pie"></i></div>
+                    <h3>SAS</h3>
+                    <p>SAS makes sense of information by combining its intelligent search, information access and data integration technologies with intuitive visual analytics so our customers can efficiently predict, prevent and respond to threats in real time.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-vial"></i></div>
+                    <h3>Testing</h3>
+                    <p>Techrapo Solutions Private Limited dedicated Testing Services business unit has a comprehensive solution portfolio which assures measurable business outcomes through improved quality processes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology">
+        <div class="container">
+            <div class="section-header">
+                <span class="tagline">We focus on global technology</span>
+                <h2>Our Technology</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon"><i class="fab fa-windows"></i></div>
+                    <h3>Microsoft Technologies</h3>
+                    <p>We Techrapo Solutions Private Limited sustain a large pool of experienced engineers with major focus on .NET technology, leveraged by our Microsoft Competency Center Lab.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fab fa-java"></i></div>
+                    <h3>Java/J2EE</h3>
+                    <p>Techrapo Solutions Private Limited service offerings in Java technology span across architecture definition, assessment, application development, deployment & maintenance.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h3>Middleware</h3>
+                    <p>Techrapo Solutions Private Limited has extensive experience in configuration, design, development, and implementation of Enterprise Application Integration using web Methods.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-share-alt"></i></div>
+                    <h3>Enterprise Web 2.0 Services</h3>
+                    <p>Techrapo Solutions Private Limited helps you quickstart your organization's Web 2.0 initiative. Enterprise Web 2.0 supported by SaaS and PaaS helps companies grow their revenue, provide better customer experiences and achieve greater market share and competitive advantage.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-database"></i></div>
+                    <h3>Oracle</h3>
+                    <p>Our Oracle Enterprise Application Competency Group has capabilities to provide ERP, CRM, and Strategic Enterprise Management (SEM) and DSS Life Cycle Implementation processes for the Oracle suite of Enterprise Applications products.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="bg-alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="tagline">Know about our Methodology concept</span>
+                <h2>Our Methodology</h2>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-project-diagram"></i></div>
+                    <h3>Project Management</h3>
+                    <p>As soon as the start of the project is authorized, the designated Project Manager starts planning for the project. Detailed project plans such as Project Management Plan (PMP), Configuration Management Plan (CMP), Risk Management Plan, Technical Plan, Quality Plan, etc.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+                    <h3>Support</h3>
+                    <p>Customer support is something that we take extremely seriously; we put equal emphasis on the support phase as of development. In fact Techrapo Solutions Private Limited has a well-defined and mature support management process which allows effective capture, reporting, tracking of Issues.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-check-circle"></i></div>
+                    <h3>Quality Management</h3>
+                    <p>Successful quality programs provide efficiencies that reduce cost, improve cycle time and leverage tools in a quantitative manner to assure the highest quality deliverable.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-sliders-h"></i></div>
+                    <h3>Technical Management</h3>
+                    <p>The purpose of Software Project Planning is to establish reasonable plans for performing the software engineering and for managing the software project.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Served Section -->
+    <section id="industries">
+        <div class="container">
+            <div class="section-header">
+                <span class="tagline">Domain Expertise</span>
+                <h2>Industries We Serve</h2>
+            </div>
+            <div class="grid-4">
+                <div class="industry-card">
+                    <i class="fas fa-university"></i>
+                    <h4>Fintech & Banking</h4>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h4>Healthcare & Pharma</h4>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h4>E-Commerce & Retail</h4>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-truck"></i>
+                    <h4>Logistics & Supply Chain</h4>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-industry"></i>
+                    <h4>Manufacturing</h4>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>EdTech & Learning</h4>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Energy & Utilities</h4>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-plane"></i>
+                    <h4>Travel & Hospitality</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="case-studies" class="bg-alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="tagline">Proven Track Record</span>
+                <h2>Featured Case Studies</h2>
+            </div>
+            <div class="grid-3">
+                <div class="case-card">
+                    <div>
+                        <span class="case-tag">Cloud Migration</span>
+                        <h3>Enterprise Legacy Modernization</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">Migrated multi-tier architecture to SaaS cloud deployment for a global logistics provider, resulting in 40% reduced infrastructure overhead.</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div>
+                        <span class="case-tag">Embedded Systems</span>
+                        <h3>Smart Industrial IoT Integration</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">Developed real-time embedded firmware and visual analytics for a manufacturing firm, optimizing predictive maintenance efficiency.</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div>
+                        <span class="case-tag">SAP Integration</span>
+                        <h3>Cross-Border ERP Optimization</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">Seamlessly connected enterprise middleware with SAP modules across 3 continents with zero operational downtime during rollout.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <span class="tagline">What Clients Say</span>
+                <h2>Testimonials</h2>
+            </div>
+            <div class="grid-2">
+                <div class="testimonial-card">
+                    <p>"Techrapo Solutions has been instrumental in scaling our core web application. Their process management across multiple time zones made outsourcing seamless."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">VP</div>
+                        <div>
+                            <strong style="color: #fff; font-size: 0.95rem;">VP of Engineering</strong>
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">Global Tech Enterprise</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"The software quality assurance and testing team at Techrapo provided rigorous validation that helped us launch on schedule with optimal reliability."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">CTO</div>
+                        <div>
+                            <strong style="color: #fff; font-size: 0.95rem;">Chief Technology Officer</strong>
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">SaaS Solutions Provider</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Form Section -->
+    <section id="contact" class="bg-alt">
+        <div class="container">
+            <div class="section-header">
+                <span class="tagline">Get In Touch</span>
+                <h2>Contact Us</h2>
+            </div>
+            <div class="contact-grid">
+                <div>
+                    <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 16px;">Ready to Scale Your Technology Operations?</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 24px;">Reach out to our team of experts today. Whether you require outsourcing, enterprise integration, or consulting, we are here to support your mission.</p>
+                    
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div><strong>Email Us:</strong><br>info@techrapo.com</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <div><strong>Call Us:</strong><br>+91 90635 43630</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <form class="contact-form" action="#" method="post" onsubmit="event.preventDefault();">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="john@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" placeholder="Project Inquiry / Consulting" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" placeholder="Tell us about your project requirements..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Chatbot Widget -->
+    <button class="chatbot-toggler">
+        <i class="fas fa-comments"></i>
+        <i class="fas fa-times"></i>
+    </button>
+    <div class="chatbot">
+        <header>
+            <h2><i class="fas fa-robot"></i> Techrapo AI Assistant</h2>
+        </header>
+        <ul class="chatbox">
+            <li class="chat incoming">
+                <i class="fas fa-robot"></i>
+                <p>Hello! 👋 Welcome to Techrapo Solutions Private Limited. How can I assist you with our services or company details today?</p>
+            </li>
         </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="#services">Web Development</a></li>
-          <li><a href="#services">Software Development</a></li>
-          <li><a href="#services">Outsourcing &amp; Consulting</a></li>
-          <li><a href="#services">System Integration</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>More</h4>
-        <ul>
-          <li><a href="#technology">Technology</a></li>
-          <li><a href="#methodology">Methodology</a></li>
-          <li><a href="#career">Find a Job</a></li>
-          <li><a href="#services">Application Services</a></li>
-        </ul>
-      </div>
+        <div class="chat-input">
+            <textarea placeholder="Ask me anything about Techrapo..." spellcheck="false" required></textarea>
+            <span id="send-btn"><i class="fas fa-paper-plane"></i></span>
+        </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 Techrapo Solutions Private Limited. All Rights Reserved.</span>
-      <span>GSTIN: 36AAHCT8631L1ZT</span>
-    </div>
-  </div>
-</footer>
 
-<script>
-  // scroll progress
-  const bar = document.getElementById('progressBar');
-  window.addEventListener('scroll', () => {
-    const h = document.documentElement;
-    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-    bar.style.width = pct + '%';
-  });
+    <!-- Corporate Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Corporate Links -->
+                <div class="footer-column">
+                    <h4>Corporate</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#solutions">Solutions</a></li>
+                        <li><a href="#technology">Technology</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
 
-  // mobile menu
-  const burger = document.getElementById('burgerBtn');
-  const nav = document.getElementById('primaryNav');
+                <!-- Services Links -->
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Web Development</a></li>
+                        <li><a href="#services">Software Development</a></li>
+                        <li><a href="#services">Outsourcing & Consulting</a></li>
+                        <li><a href="#services">System Integration</a></li>
+                        <li><a href="#services">IT Outsourcing</a></li>
+                        <li><a href="#services">Application Services</a></li>
+                    </ul>
+                </div>
 
-  function closeMenu(){
-    nav.classList.remove('open');
-    burger.classList.remove('active');
-    burger.setAttribute('aria-expanded', 'false');
-    document.body.classList.remove('nav-open');
-    document.querySelectorAll('li.has-drop.open').forEach(li => li.classList.remove('open'));
-  }
-  function toggleMenu(){
-    const isOpen = nav.classList.toggle('open');
-    burger.classList.toggle('active', isOpen);
-    burger.setAttribute('aria-expanded', String(isOpen));
-    document.body.classList.toggle('nav-open', isOpen);
-  }
+                <!-- Reach Us -->
+                <div class="footer-column" style="grid-column: span 2;">
+                    <h4>Reach Us</h4>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong style="color: #fff;">Hyderabad Office:</strong><br>
+                                Techrapo Solutions Private Limited<br>
+                                3rd Floor, Capitol Tower, Plot No:1, Khanamet, Beside N Convention, Madhapur, Hyderabad – 500 081, Telangana, India.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong style="color: #fff;">Bangalore Office:</strong><br>
+                                M/s. Techrapo Solutions Private Limited<br>
+                                C/o. Lorven Coworks, No. 76(Old No. 756), 3rd Floor, 10th Main Road, Jayanagar, 4th Block, Bangalore - 560011, Karnataka, India.
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-file-invoice"></i>
+                            <div><strong style="color: #fff;">GSTIN:</strong> 36AAHCT8631L1ZT</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <div>+91 90635 43630</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>info@techrapo.com</div>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 20px;">
+                        <strong style="color: #fff; font-size: 0.9rem;">Follow us On:</strong>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Linkedin"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Google"><i class="fab fa-google"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  burger.addEventListener('click', toggleMenu);
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 Techrapo Solutions Private Limited. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-  document.querySelectorAll('.has-drop > button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (window.innerWidth <= 1024) btn.parentElement.classList.toggle('open');
-    });
-  });
+    <!-- Chatbot Logic Script -->
+    <script>
+        const chatbotToggler = document.querySelector(".chatbot-toggler");
+        const chatInput = document.querySelector(".chat-input textarea");
+        const sendBtn = document.querySelector("#send-btn");
+        const chatbox = document.querySelector(".chatbox");
 
-  document.querySelectorAll('nav.primary a').forEach(a => a.addEventListener('click', closeMenu));
+        let userMessage = "";
 
-  window.addEventListener('resize', () => { if (window.innerWidth > 1024) closeMenu(); });
+        // Interactive Knowledge Base for Techrapo Solutions
+        const generateResponse = (userMsg) => {
+            const msg = userMsg.toLowerCase();
 
-  // reveal on scroll
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+            if (msg.includes("about") || msg.includes("company") || msg.includes("who are you") || msg.includes("history")) {
+                return "Techrapo Solutions Private Limited was established in 2019. We are a pioneer in IT solutions offering Web & Software Development, IT Outsourcing, Consulting, and BPO services.";
+            } else if (msg.includes("service") || msg.includes("what do you do") || msg.includes("offer")) {
+                return "Our core services include:
+• Web Development
+• Software Development
+• Outsourcing & Consulting
+• System Integration
+• IT Outsourcing
+• Application Services";
+            } else if (msg.includes("solution") || msg.includes("sap") || msg.includes("cloud") || msg.includes("embedded") || msg.includes("testing")) {
+                return "Our Solution offerings span across:
+• SAP Integration & Deployment
+• Cloud & SaaS Infrastructure
+• Embedded Systems & Smart Devices
+• SAS Visual Analytics
+• Comprehensive Testing Services";
+            } else if (msg.includes("tech") || msg.includes("stack") || msg.includes("java") || msg.includes("microsoft") || msg.includes("oracle")) {
+                return "We specialize in top global technologies including Microsoft .NET, Java/J2EE, Enterprise Middleware (webMethods), Oracle ERP/CRM, and Web 2.0 Services (SaaS/PaaS).";
+            } else if (msg.includes("contact") || msg.includes("address") || msg.includes("location") || msg.includes("phone") || msg.includes("email") || msg.includes("office")) {
+                return "You can reach us at:
+📧 info@techrapo.com
+📞 +91 90635 43630
+📍 Hyderabad Office: Madhapur, Hyderabad - 500081
+📍 Bangalore Office: Jayanagar 4th Block, Bangalore - 560011";
+            } else if (msg.includes("methodology") || msg.includes("process") || msg.includes("manage")) {
+                return "Our methodology focuses on 4 key pillars: Project Management (PMP, Risk & CMP), Quality Management, Dedicated Technical Support, and Software Project Planning.";
+            } else if (msg.includes("hi") || msg.includes("hello") || msg.includes("hey")) {
+                return "Hello! How can I assist you with Techrapo Solutions today? Feel free to ask about our services, solutions, technology stack, or contact details!";
+            } else {
+                return "Thank you for asking! For specific details or customized consulting inquiries regarding '" + userMsg + "', please email us at info@techrapo.com or call +91 90635 43630. Our team will be happy to assist you!";
+            }
+        };
 
-  // ===== Country list, dial codes, max phone digits, phone validation =====
-  // [name, dial code, max digits allowed for that country's local number]
-  const COUNTRIES = [
-    ["Afghanistan","93",9],["Albania","355",9],["Algeria","213",9],["Andorra","376",9],["Angola","244",9],
-    ["Antigua and Barbuda","1",10],["Argentina","54",10],["Armenia","374",8],["Australia","61",15],["Austria","43",13],
-    ["Azerbaijan","994",9],["Bahamas","1",10],["Bahrain","973",8],["Bangladesh","880",10],["Barbados","1",10],
-    ["Belarus","375",10],["Belgium","32",9],["Belize","501",7],["Benin","229",8],["Bhutan","975",8],
-    ["Bolivia","591",8],["Bosnia and Herzegovina","387",8],["Botswana","267",8],["Brazil","55",10],["Brunei","673",7],
-    ["Bulgaria","359",9],["Burkina Faso","226",8],["Burundi","257",8],["Cabo Verde","238",7],["Cambodia","855",8],
-    ["Cameroon","237",8],["Canada","1",10],["Central African Republic","236",8],["Chad","235",7],["Chile","56",9],
-    ["China","86",12],["Colombia","57",10],["Comoros","269",7],["Congo (Congo-Brazzaville)","242",7],["Costa Rica","506",8],
-    ["Croatia","385",12],["Cuba","53",8],["Cyprus","357",11],["Czechia","420",12],["Democratic Republic of the Congo","243",9],
-    ["Denmark","45",8],["Djibouti","253",6],["Dominica","1",10],["Dominican Republic","1",10],["Ecuador","593",8],
-    ["Egypt","20",9],["El Salvador","503",11],["Equatorial Guinea","240",6],["Eritrea","291",7],["Estonia","372",10],
-    ["Eswatini","268",8],["Ethiopia","251",9],["Fiji","679",7],["Finland","358",12],["France","33",9],
-    ["Gabon","241",7],["Gambia","220",7],["Georgia","995",8],["Germany","49",13],["Ghana","233",9],
-    ["Greece","30",10],["Grenada","1",10],["Guatemala","502",8],["Guinea","224",8],["Guinea-Bissau","245",7],
-    ["Guyana","592",7],["Haiti","509",8],["Honduras","504",8],["Hungary","36",9],["Iceland","354",9],
-    ["India","91",10],["Indonesia","62",10],["Iran","98",10],["Iraq","964",10],["Ireland","353",11],
-    ["Israel","972",9],["Italy","39",11],["Jamaica","1",10],["Japan","81",10],["Jordan","962",9],
-    ["Kazakhstan","7",10],["Kenya","254",10],["Kiribati","686",5],["Kuwait","965",8],["Kyrgyzstan","996",9],
-    ["Laos","856",9],["Latvia","371",8],["Lebanon","961",8],["Lesotho","266",8],["Liberia","231",8],
-    ["Libya","218",9],["Liechtenstein","423",9],["Lithuania","370",8],["Luxembourg","352",11],["Madagascar","261",10],
-    ["Malawi","265",8],["Malaysia","60",9],["Maldives","960",7],["Mali","223",8],["Malta","356",8],
-    ["Marshall Islands","692",7],["Mauritania","222",7],["Mauritius","230",7],["Mexico","52",10],["Micronesia","691",7],
-    ["Moldova","373",8],["Monaco","377",9],["Mongolia","976",8],["Montenegro","382",12],["Morocco","212",9],
-    ["Mozambique","258",9],["Myanmar","95",9],["Namibia","264",10],["Nauru","674",7],["Nepal","977",9],
-    ["Netherlands","31",9],["New Zealand","64",10],["Nicaragua","505",8],["Niger","227",8],["Nigeria","234",10],
-    ["North Korea","850",10],["North Macedonia","389",8],["Norway","47",8],["Oman","968",8],["Pakistan","92",11],
-    ["Palau","680",7],["Palestine","970",9],["Panama","507",8],["Papua New Guinea","675",11],["Paraguay","595",9],
-    ["Peru","51",11],["Philippines","63",10],["Poland","48",9],["Portugal","351",11],["Qatar","974",10],
-    ["Romania","40",9],["Russia","7",10],["Rwanda","250",9],["Saint Kitts and Nevis","1",10],["Saint Lucia","1",10],
-    ["Saint Vincent and the Grenadines","1",10],["Samoa","685",7],["San Marino","378",10],["Sao Tome and Principe","239",7],["Saudi Arabia","966",9],
-    ["Senegal","221",9],["Serbia","381",12],["Seychelles","248",6],["Sierra Leone","232",8],["Singapore","65",12],
-    ["Slovakia","421",9],["Slovenia","386",8],["Solomon Islands","677",5],["Somalia","252",8],["South Africa","27",9],
-    ["South Korea","82",11],["South Sudan","211",9],["Spain","34",9],["Sri Lanka","94",9],["Sudan","249",9],
-    ["Suriname","597",7],["Sweden","46",13],["Switzerland","41",12],["Syria","963",10],["Taiwan","886",9],
-    ["Tajikistan","992",9],["Tanzania","255",9],["Thailand","66",9],["Timor-Leste","670",7],["Togo","228",7],
-    ["Tonga","676",7],["Trinidad and Tobago","1",10],["Tunisia","216",8],["Turkey","90",10],["Turkmenistan","993",8],
-    ["Tuvalu","688",6],["Uganda","256",9],["Ukraine","380",9],["United Arab Emirates","971",9],["United Kingdom","44",10],
-    ["United States","1",10],["Uruguay","598",11],["Uzbekistan","998",9],["Vanuatu","678",7],["Vatican City","379",11],
-    ["Venezuela","58",10],["Vietnam","84",10],["Yemen","967",9],["Zambia","260",9],["Zimbabwe","263",9]
-  ];
+        const createChatLi = (message, className) => {
+            const chatLi = document.createElement("li");
+            chatLi.classList.add("chat", className);
+            let chatContent = className === "outgoing" 
+                ? `<p></p>` 
+                : `<i class="fas fa-robot"></i><p></p>`;
+            chatLi.innerHTML = chatContent;
+            chatLi.querySelector("p").textContent = message;
+            return chatLi;
+        }
 
-  const countrySelect = document.getElementById('fcountry');
-  const phoneCode = document.getElementById('phoneCode');
-  const phoneInput = document.getElementById('fphone');
+        const handleChat = () => {
+            userMessage = chatInput.value.trim();
+            if (!userMessage) return;
 
-  COUNTRIES.forEach(([name, code, maxLen]) => {
-    const opt = document.createElement('option');
-    opt.value = name;
-    opt.dataset.code = code;
-    opt.dataset.maxlen = maxLen;
-    opt.textContent = name;
-    countrySelect.appendChild(opt);
-  });
+            chatInput.value = "";
+            chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+            chatbox.scrollTo(0, chatbox.scrollHeight);
 
-  function setPhoneLimit(maxLen){
-    phoneInput.maxLength = maxLen;
-    phoneInput.placeholder = '0'.repeat(maxLen);
-    phoneInput.value = phoneInput.value.slice(0, maxLen);
-  }
-  setPhoneLimit(10); // default until a country is picked (India = 10)
+            setTimeout(() => {
+                const incomingChatLi = createChatLi("Thinking...", "incoming");
+                chatbox.appendChild(incomingChatLi);
+                chatbox.scrollTo(0, chatbox.scrollHeight);
 
-  countrySelect.addEventListener('change', function(){
-    const selected = this.options[this.selectedIndex];
-    phoneCode.textContent = '+' + (selected.dataset.code || '');
-    setPhoneLimit(Number(selected.dataset.maxlen) || 10);
-  });
+                setTimeout(() => {
+                    const response = generateResponse(userMessage);
+                    incomingChatLi.querySelector("p").textContent = response;
+                    chatbox.scrollTo(0, chatbox.scrollHeight);
+                }, 600);
 
-  phoneInput.addEventListener('input', function(){
-    const maxLen = Number(this.maxLength) > 0 ? Number(this.maxLength) : 10;
-    this.value = this.value.replace(/\D/g, '').slice(0, maxLen);
-  });
+            }, 300);
+        }
 
-  // ===== Google Sheets integration =====
-  // 1. Paste your deployed Apps Script Web App URL below (see setup instructions provided separately).
-  const SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbw_Iw3yP2p-2bFlimv3KJSCJSOiSEleJ-WT8HgivzqKHOY4-DbjUyAOgH_yRFsl2r1OAQ/exec';
+        sendBtn.addEventListener("click", handleChat);
 
-  // Fire-and-forget: Apps Script web apps can take a couple of seconds to
-  // respond (cold start) and mode:'no-cors' means we can't read the response
-  // anyway, so we don't make the user wait on it — the UI updates instantly
-  // and this request just runs quietly in the background.
-  function sendToSheet(payload){
-    fetch(SHEET_WEBAPP_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight
-      body: JSON.stringify(payload)
-    }).catch(err => console.error('Sheet submission failed:', err));
-  }
+        chatInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleChat();
+            }
+        });
 
-  // newsletter form
-  const newsletterForm = document.getElementById('newsletterForm');
-  const newsletterMsg = document.getElementById('newsletterMsg');
-  newsletterForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    const emailInput = this.querySelector('input[type="email"]');
-    const email = emailInput.value.trim();
-    if (!email) return;
-
-    const btn = this.querySelector('button');
-    btn.disabled = true;
-
-    sendToSheet({ formType: 'newsletter', email: email });
-
-    newsletterMsg.textContent = "— Thank you, you're subscribed.";
-    newsletterMsg.style.display = 'block';
-    newsletterForm.reset();
-
-    setTimeout(() => { btn.disabled = false; }, 800);
-  });
-
-  // contact form
-  const contactForm = document.getElementById('contactForm');
-  const formMsg = document.getElementById('formMsg');
-  contactForm.addEventListener('submit', function(e){
-    e.preventDefault();
-
-    const requiredLen = Number(countrySelect.options[countrySelect.selectedIndex]?.dataset.maxlen) || 10;
-    if (!countrySelect.value || phoneInput.value.length !== requiredLen) {
-      formMsg.textContent = '— Please select a country and enter a valid ' + requiredLen + '-digit phone number.';
-      formMsg.style.display = 'block';
-      phoneInput.focus();
-      return;
-    }
-
-    const payload = {
-      formType: 'contact',
-      name: document.getElementById('fname').value.trim(),
-      email: document.getElementById('femail').value.trim(),
-      country: document.getElementById('fcountry').value,
-      phone: phoneCode.textContent + ' ' + phoneInput.value,
-      subject: document.getElementById('fsubject').value.trim(),
-      message: document.getElementById('fmessage').value.trim()
-    };
-
-    const btn = this.querySelector('button[type="submit"]');
-    btn.disabled = true;
-
-    sendToSheet(payload);
-
-    formMsg.textContent = "— Thank you, we'll be in touch shortly.";
-    formMsg.style.display = 'block';
-    contactForm.reset();
-    phoneCode.textContent = '+91';
-    setPhoneLimit(10);
-
-    setTimeout(() => { btn.disabled = false; }, 800);
-  });
-</script>
+        chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+    </script>
 </body>
 </html>

@@ -107,15 +107,25 @@
         }
 
         .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             display: flex;
             align-items: center;
+            gap: 10px;
             z-index: 1001;
         }
 
-        .logo img {
-            height: 40px;
+        .logo-icon, .logo span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-img {
+            height: 36px;
             width: auto;
-            display: block;
+            object-fit: contain;
         }
 
         .menu-toggle {
@@ -650,164 +660,131 @@
 
         /* Footer */
         footer {
-            background-color: rgba(6, 9, 18, 0.9);
+            background-color: var(--bg-card);
             border-top: 1px solid var(--border-color);
-            padding: 70px 0 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: var(--gradient-primary);
-            opacity: 0.5;
+            padding: 64px 0 0;
         }
 
         .footer-grid {
             display: grid;
             grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
             gap: 40px;
-            padding-bottom: 50px;
+            padding-bottom: 48px;
         }
 
-        .footer-col .logo {
+        .footer-col .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            font-weight: 800;
             margin-bottom: 16px;
+        }
+
+        .footer-logo-img {
+            height: 34px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .footer-logo span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .footer-col p {
             color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.7;
+            font-size: 0.9rem;
             margin-bottom: 20px;
         }
 
         .footer-col h4 {
-            color: #fff;
             font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 22px;
-            letter-spacing: 0.3px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-main);
         }
 
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .footer-col ul li {
+            margin-bottom: 12px;
         }
 
-        .footer-links a {
+        .footer-col ul li a {
             color: var(--text-muted);
             font-size: 0.9rem;
             transition: var(--transition);
-            width: fit-content;
         }
 
-        .footer-links a:hover {
+        .footer-col ul li a:hover {
             color: var(--primary-glow);
-            transform: translateX(3px);
+            padding-left: 4px;
         }
 
-        .footer-contact {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .footer-contact li {
+        .footer-col .contact-item {
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 10px;
             color: var(--text-muted);
             font-size: 0.9rem;
-            line-height: 1.5;
+            margin-bottom: 14px;
         }
 
-        .footer-contact i {
+        .footer-col .contact-item i {
             color: var(--primary-glow);
             margin-top: 3px;
-            width: 16px;
         }
 
-        .footer-contact a {
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-
-        .footer-contact a:hover {
-            color: var(--primary-glow);
-        }
-
-        .social-links {
+        .footer-social {
             display: flex;
             gap: 12px;
-            margin-top: 24px;
         }
 
-        .social-links a {
+        .footer-social a {
             width: 38px;
             height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
             color: var(--text-muted);
             transition: var(--transition);
         }
 
-        .social-links a:hover {
-            color: var(--bg-dark);
+        .footer-social a:hover {
             background: var(--gradient-primary);
+            color: var(--bg-dark);
             border-color: transparent;
             transform: translateY(-3px);
         }
 
         .footer-bottom {
             border-top: 1px solid var(--border-color);
-            padding: 24px 0;
+            padding: 20px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .footer-bottom p {
-            color: var(--text-muted);
+            gap: 10px;
             font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
         .footer-bottom-links {
             display: flex;
-            gap: 24px;
+            gap: 20px;
         }
 
-        .footer-bottom-links a {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            transition: var(--transition);
-        }
-
-        .footer-bottom-links a:hover {
-            color: var(--primary-glow);
-        }
-
-        @media (max-width: 992px) {
+        @media (max-width: 900px) {
             .footer-grid {
                 grid-template-columns: 1fr 1fr;
             }
         }
 
-        @media (max-width: 576px) {
+        @media (max-width: 560px) {
             .footer-grid {
                 grid-template-columns: 1fr;
-                gap: 32px;
             }
 
             .footer-bottom {
@@ -831,7 +808,7 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <img src="assets/Techrapo_Logo_white.png" alt="Techrapo Solutions">
+                    <img src="logo.png" alt="Techrapo Solutions Logo" class="logo-img"> Techrapo<span>Solutions</span>
                 </div>
                 <div class="menu-toggle" id="mobile-menu">
                     <i class="fas fa-bars"></i>
@@ -892,7 +869,7 @@
                     <p>Techrapo Solutions Private Limited which began as a small company has now risen to become a pioneer in the area of IT solutions, offering wide spectrum of services including web development, software development, BPO, Outsourcing and Consulting.</p>
                 </div>
                 <div class="about-image">
-                    <img src="assets/Techrapo_Logo_white.png" alt="About Techrapo Solutions">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="About Techrapo Solutions">
                 </div>
             </div>
         </div>
@@ -1002,56 +979,57 @@
     </section>
 
     <!-- Footer -->
-    <footer id="contact">
+    <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <div class="logo">
-                        <img src="assets/Techrapo_Logo_white.png" alt="Techrapo Solutions">
+                    <div class="footer-logo">
+                        <img src="logo.png" alt="Techrapo Solutions Logo" class="footer-logo-img"> Techrapo<span>Solutions</span>
                     </div>
-                    <p>Techrapo Solutions Private Limited is an IT consulting, outsourcing, and technical management company delivering web development, software development, and enterprise solutions since 2019.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <p>Techrapo Solutions Private Limited has been a pioneer in IT solutions since 2019, offering web development, software development, BPO, outsourcing and consulting services worldwide.</p>
+                    <div class="footer-social">
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-
                 <div class="footer-col">
                     <h4>Quick Links</h4>
-                    <ul class="footer-links">
+                    <ul>
                         <li><a href="#about">About</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#solutions">Solutions</a></li>
-                        <li><a href="#case-studies">Case Studies</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-
                 <div class="footer-col">
                     <h4>Services</h4>
-                    <ul class="footer-links">
+                    <ul>
                         <li><a href="#services">Web Development</a></li>
                         <li><a href="#services">Software Development</a></li>
                         <li><a href="#services">Outsourcing & Consulting</a></li>
                         <li><a href="#services">System Integration</a></li>
-                        <li><a href="#services">IT Outsourcing</a></li>
-                        <li><a href="#services">Application Services</a></li>
                     </ul>
                 </div>
-
                 <div class="footer-col">
                     <h4>Contact Us</h4>
-                    <ul class="footer-contact">
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@techrapo.com">info@techrapo.com</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> Hyderabad &amp; Bangalore, India</li>
-                    </ul>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@techrapo.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 000 000 0000</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Hyderabad, Telangana, India</span>
+                    </div>
                 </div>
             </div>
-
             <div class="footer-bottom">
-                <p>&copy; <span id="footer-year"></span> Techrapo Solutions Private Limited. All rights reserved.</p>
+                <p>&copy; 2026 Techrapo Solutions Private Limited. All rights reserved.</p>
                 <div class="footer-bottom-links">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
@@ -1110,9 +1088,6 @@
         chatToggle.addEventListener('click', () => {
             document.body.classList.toggle('show-chatbot');
         });
-
-        // Footer Year
-        document.getElementById('footer-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
